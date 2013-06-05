@@ -6,10 +6,11 @@
 ==============================================================================
 */
 
-/** @namespace
 
-  My cool new app.  Describe your application.
-  
+// This file defines the APPLICATION'S NAMESPACE together with its GLOBAL
+// CONSTANTS and SINGLETON OBJECTS.
+
+/** @namespace
   @extends SC.Object
 */
 Multivio = SC.Application.create({
@@ -17,13 +18,10 @@ Multivio = SC.Application.create({
   NAMESPACE: 'Multivio',
   VERSION: '1.0.0',
 
-  // This is your application store.  You will use this store to access all
-  // of your model data.  You can also set a data source on this store to
-  // connect to a backend server.  The default setup below connects the store
-  // to any fixtures you define.
-  //store: SC.Store.create().from(SC.Record.fixtures)
-  
-  // TODO: Add global constants or singleton objects needed by your app here.
+  /**
+    The application store. Used to access all model data at the backend server.
+    It is initialized in the `main` state of the statechart.
+  */
   store: null,
 
   /**
@@ -32,29 +30,36 @@ Multivio = SC.Application.create({
   */
   currentThumbnailController: null,
 
-  // the name of the active theme
-  currentTheme: null
-});
+  /**
+    The name of the active theme
+  */
+  currentTheme: null,
 
-/**
-  Change the graphical theme that is currently selected. The name of the
-  theme to be applied must be a property called 'newTheme' of the object
-  given as input. This object is usually a view that calls this method
-  through a target/action binding. In that case the view must contain the
-  newTheme property.
+  /**
+    TODO: check usefulness
+  
+    Change the graphical theme that is currently selected. The name of the
+    theme to be applied must be a property called 'newTheme' of the object
+    given as input. This object is usually a view that calls this method
+    through a target/action binding. In that case the view must contain the
+    newTheme property.
 
-  @param {SC.Object} caller the object that called this method (usually an SC.View);
-*/
-Multivio.changeTheme = function (caller) {
-  var currentTheme = Multivio.get('currentTheme'),
-    newTheme = caller.get('newTheme');
-  if (!SC.none(caller)) {
-    if (!SC.none(newTheme) && newTheme !== currentTheme) {
-      SC.Logger.debug('Changing theme from %@ to %@'.fmt(currentTheme, newTheme));
-      SC.$('body')
-        .addClass('mvo-%@-theme'.fmt(newTheme))
-        .removeClass('mvo-%@-theme'.fmt(currentTheme));
+    @param {SC.Object} caller the object that called this method (usually an
+    SC.View);
+  */
+  changeTheme: function (caller) {
+    var currentTheme = Multivio.get('currentTheme'),
+      newTheme = caller.get('newTheme');
+    if (!SC.none(caller)) {
+      if (!SC.none(newTheme) && newTheme !== currentTheme) {
+        SC.Logger.debug(
+          'Changing theme from %@ to %@'.fmt(currentTheme, newTheme));
+        SC.$('body')
+          .addClass('mvo-%@-theme'.fmt(newTheme))
+          .removeClass('mvo-%@-theme'.fmt(currentTheme));
+      }
+      Multivio.set('currentTheme', newTheme);
     }
-    Multivio.set('currentTheme', newTheme);
   }
-};
+
+});

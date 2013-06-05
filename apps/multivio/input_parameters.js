@@ -6,9 +6,12 @@
 ==============================================================================
 */
 
+
+// TODO check usefulness
+
 /** @class
 
-  TODO...
+  TODO... add doc
 
 @extends SC.Object
 */

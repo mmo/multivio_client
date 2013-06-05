@@ -1,0 +1,38 @@
+# Things to be done
+
+
+## Main Tasks
+
+- text selection (1day, 1-2day)
+- calendar(3day)
+- pre-indexing(2 day)
+
+
+## Minor Tasks
+
+- overview (1day)
+- finalize shortcut (1day)
+- themes + appearance (1day)
+- API (1 day)
+- tests and IE (5 days)
+- grid thumbnails (1/2 day)
+
+
+## Related to code review and documentation
+
+- update copyright header message in all files (2009-2013)
+- review TODOs
+- check JSDoc compliance
+- add unit tests
+- rewrite root README in MarkDown
+
+
+## DONE
+
+- page number
+- download
+- tree to finalize
+- image support
+- search (1day)
+- go to page
+- 100%
