@@ -21,7 +21,22 @@ The app employs a standard SproutCore folder structure, with the following addit
 	 - **`apps/multivio/docs/`** - local project documentation
 - files:
 	 - **`apps/multivio/configurator.js`** - application configuration
-	 - **`apps/multivio/input_parameters.js`** - URL argument parsing object
+
+
+#### Important files in the `apps` folder
+
+(See )
+
+##### `apps/resources/main_page`
+
+This file defines the main view page: `Multivio.mainPage` (an instance of `SC.Page`), containing a set of views, together with its `mainPane`, the root interface element. All the child views of `mainPane` become visible as soon as the pane is displayed on the screen (by the `statechart`).
+
+##### `models/file.js`
+
+...
+
+
+
 
 
 ### `frameworks/`

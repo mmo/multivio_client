@@ -25,6 +25,7 @@
 - check JSDoc compliance
 - add unit tests
 - rewrite root README in MarkDown
+- update loading pages (Multivio.loadingPage and loading.rhtml)
 
 
 ## DONE
