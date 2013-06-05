@@ -7,15 +7,18 @@
 */
 
 
-// TODO check usefulness
+/**
+  @namespace
+
+  Object that stores the app's input options read from the entry URL
+*/
 
 /** @class
-
-  TODO... add doc
 
 @extends SC.Object
 */
 
+/*
 Multivio.inputParameters = SC.Object.create({
 
   options: {},
@@ -50,3 +53,4 @@ Multivio.inputParameters = SC.Object.create({
   }
 });
 
+*/
