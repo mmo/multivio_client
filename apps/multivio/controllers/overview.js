@@ -54,10 +54,13 @@ Multivio.overviewController = SC.ObjectController.create({
   /** @private */
   _showPaletteDidChange: function () {
     var showPalette = this.get('showPalette');
-    if (showPalette) {
-      Multivio.getPath('mainPage.overview').open();
-    } else {
-      Multivio.getPath('mainPage.overview').close();
+    var ov = Multivio.getPath('mainPage.overview');
+    if (ov) {
+      if (showPalette) {
+        ov.open();
+      } else {
+        ov.close();
+      }
     }
   }.observes('showPalette')
 });
