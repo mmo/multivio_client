@@ -25,11 +25,15 @@ The app employs a standard SproutCore folder structure, with the following addit
 
 #### Important files in the `apps` folder
 
-(See )
+(See also the files mentioned in the _Loading sequence_ section.)
 
 ##### `apps/resources/main_page`
 
-This file defines the main view page: `Multivio.mainPage` (an instance of `SC.Page`), containing a set of views, together with its `mainPane`, the root interface element. All the child views of `mainPane` become visible as soon as the pane is displayed on the screen (by the `statechart`).
+This file defines the main page: `Multivio.mainPage` (in SC, *A Page object is used to store a set of views that can be lazily configured as needed...*), together with its `mainPane` (in SC, *a pane is just like a regular view except that it doesn’t need to live within a parent view...*). 
+
+Hence, `mainPane` is the root interface element of the application: it takes the whole screen, and all its child views become visible as soon as the pane is displayed on the screen (which is done in the `statechart`).
+
+Note that there are additional, secondary pages and panes in the application (for error messages, application loading, etc.), but the main action really occurs inside `Multivio.mainPage.mainPane`.
 
 ##### `models/file.js`
 
@@ -87,6 +91,11 @@ In http://guides.sproutcore.com/getting_started.html:
 
 The `main.js` file is very basic: it starts the application and initializes the statechart. From there on, the statechart takes control of the application.
 
+
+## Important SproutCore-related facts
+
+- views use absolute positioning [http://guides.sproutcore.com/views.html]
+- 
 
 ### `statecharts/main_statechart.js`
 
