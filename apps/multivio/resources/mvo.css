@@ -8,18 +8,23 @@
 
 body {
   background: none repeat scroll 0 0 #fff;
+  font-size: 12px;
+  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  min-height: 300px;
+  min-width: 300px;
 }
 
-.sc-pane, .sc-main {
+$theme.mvo-main-pane {
   background: none repeat scroll 0 0 #444;
   color: #fff;
 }
 
-.source-list.collection,
-.sc-grid-view.collection {
+/*$theme.source-list.collection,
+$theme.sc-grid-view.collection {
   background: none repeat scroll 0 0 #ccc;
   color: #000;
 }
+*/
 
 /*
 -----------------------------
@@ -28,33 +33,35 @@ Multivio specific styles
 */
 
 /** for page entry */
+
 .mvo-pagenr input {
   text-align: center;
   height: 24px;
 }
 
-.sc-pane.sc-panel.mvo-palette-pane .sc-scroll-view {
+/*.sc-pane.sc-panel.mvo-palette-pane .sc-scroll-view {
   border: 2px solid #fff;
-}
+}*/
 
-.sc-scroll-view {
+/*.sc-scroll-view {
   background: none repeat scroll 0 0 blue;
-}
+}*/
 
-
-.sc-container-view {
+/*.sc-container-view {
   background: none repeat scroll 0 0 #666;
-}
+}*/
 
-.mvo-center-image {
+/*.mvo-center-image {
   box-shadow: 5px 5px 5px #333;
   -moz-box-shadow: 5px 5px 5px #333;
   -webkit-box-shadow: 5px 5px 5px #333;
   border: 1px solid #ccc;
 }
+*/
 .mvo-center-image .sc-collection-view {
 	background: none;
 }
+/*
 .mvo-search-results {
   opacity: 0.50;
   -moz-opacity: 0.50;
@@ -71,6 +78,7 @@ Multivio specific styles
 #mvo-thumbnails .sc-collection-item.sel {
   background: none repeat scroll 0 0 #608AB9;
 }
+*/
 
 .sc-list-item-view img {
   display: block;
@@ -80,21 +88,21 @@ Multivio specific styles
   vertical-align: middle;
 }
 
+/*
 #mvo-navigation-bar .sc-list-item-view img {
-/*  margin: 4px;*/
   padding: 4px;
 }
-
+*/
 #mvo-navigation-bar {
   background: none repeat scroll 0 0 #444;
   border:none;
 }
-
+/*
 #mvo-navigation-bar .sc-list-item-view.sel {
   background: none repeat scroll 0 0 #ccc;
   border:none;
 }
-
+*/
 
 .sc-list-item-view.sel img {
   background: none repeat scroll 0 0 #ccc;
@@ -130,11 +138,16 @@ Multivio specific styles
   padding: 20px;
 }
 
-.toolbar, .mvo-front-view-transparent {
+$theme.mvo-front-view-transparent {
   background: sc_static("images/transparency_ddd_90.png") repeat scroll 0 0 transparent;
   border: none;
   /*z-index: -10000;*/
 }
+
+$theme.metadata {
+  font-size: 16px;
+}
+
 
 /*
 -----------------------------
@@ -165,8 +178,14 @@ label {
   background-position: center center;
   background-repeat: no-repeat;
 }
-.toolbar .sc-image-button-view.active .img, .sc-image-button-view.sel .img {
+/*.toolbar .sc-image-button-view.active .img, .sc-image-button-view.sel .img {
   background: none repeat scroll 0 0 lightSteelBlue;
+}
+*/
+
+$theme.sc-button-view.sel {
+  background-color: #777;
+  border-radius: 4px;
 }
 
 .toolbar .sc-image-button-view.disabled .img {

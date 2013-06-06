@@ -30,7 +30,8 @@ proxy '/local',
 mode :all do
  config :all,
    :required => [:sproutcore, 'sproutcore/animation', 'sproutcore/statechart'],
-   :theme_name => 'mvo mvo-default-theme'
+   :theme => 'sproutcore/ace',
+   :css_theme => 'ace.mvo-basic'
 	 #:load_fixtures => true
 end
 

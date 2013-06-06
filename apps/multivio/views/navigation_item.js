@@ -16,6 +16,7 @@ Multivio.NavigationItem = SC.ListItemView.extend({
 
   // TODO: Add your own code here.
   displayProperties: ['icon', 'panel'],
+  classNames: 'sc-button-view'.w(),
   layout: {height: 40, centerX: 0, centerY: 0, width: 40},
   mouseEntered: function () {
     var jquery = this.$();

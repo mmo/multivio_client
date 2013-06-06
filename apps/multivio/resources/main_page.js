@@ -36,6 +36,7 @@ Multivio.mainPage = SC.Page.design({
   //
   mainPane: SC.MainPane.design({
     childViews: 'bottomView centerView leftView'.w(),
+    classNames: 'mvo-main-pane'.w(),
     defaultResponder: 'Multivio.mainStatechart',
 
     bottomView: Multivio.TitleView,
