@@ -9,7 +9,7 @@
 /**
   @namespace
 
-  Creates the main the main user interface of Multivio.
+  Defines the main user interface of Multivio.
   
   @since 0.1.0
 */
@@ -25,6 +25,13 @@ sc_require('views/tree.js');
 sc_require('views/search.js');
 sc_require('views/overview.js');
 
+/**
+  "A Page object is used to store a set of views that can be lazily configured as
+  needed...", in SC Guides http://guides.sproutcore.com/views.html
+
+  The 'mainPage' contains references to all the top-level views that are employed
+  throughout the application
+*/
 Multivio.mainPage = SC.Page.design({
 
   // The main pane is made visible on screen at application startup, invoked by
@@ -40,10 +47,18 @@ Multivio.mainPage = SC.Page.design({
     defaultResponder: 'Multivio.mainStatechart',
 
     bottomView: Multivio.TitleView,
-    centerView: SC.ContainerView.design(Multivio.innerGradient, {
+
+    centerView: SC.View.design(Multivio.innerGradient, {
       layout: { top: 5, left: 40, bottom: 40, right: 5 },
-      classNames: 'mvo-container-view'.w()
+      classNames: 'mvo-center-view'.w(),
+      childViews: 'mainContentView'.w(),
+      
+      mainContentView: SC.ContainerView.design({
+        classNames: 'mvo-container-view'.w(),
+        layout: { top: 5, left: 5, bottom: 5, right: 5 }
+      }),
     }),
+
     leftView: Multivio.NavigationBar,
 
     mouseDown: function (ev) {

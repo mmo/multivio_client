@@ -11,7 +11,9 @@ sc_require('controllers/image.js');
 sc_require('views/center_image.js');
 
 Multivio.mainImageView =  SC.View.design({
-  childViews: ['waitingView', 'imageScrollView', 'bottomToolbar'], 
+  classNames: 'mvo-main-image-view'.w(),
+  childViews: ['waitingView', 'imageScrollView', 'bottomToolbar'],
+  classNames: 'mvo-main-image-view'.w(),
 
   //acceptsFirstResponder: YES,
   keyDown: function (evt) {
@@ -29,18 +31,17 @@ Multivio.mainImageView =  SC.View.design({
 
   waitingView: SC.ImageView.design({
     layout: { centerX: 0, centerY: 0, width: 36, height: 36 },
+    classNames: 'mvo-waiting-view mvo-waiting'.w(),
     isVisible: YES,
     //canvas do not work with animated gifs
     useCanvas: NO,
     isVisibleBinding: 'Multivio.imageFileController.loadingPage',
-    value: static_url('images/progress_wheel_medium.gif'),
-    classNames: "mvo-waiting".w()
+    value: static_url('images/progress_wheel_medium.gif')
   }),
 
-
   imageScrollView: SC.ScrollView.design({
-    classNames: "mvo-center".w(),
-    layout: { top: 5, left: 5, bottom: 5, right: 5},
+    classNames: "mvo-image-scroll-view".w(),
+    layout: { top: 0, left: 0, bottom: 0, right: 0},
     contentView: Multivio.CenterImage.design({
       layout: { centerX: 0, centerY: 0 },
       init: function () {
@@ -55,7 +56,7 @@ Multivio.mainImageView =  SC.View.design({
 
   bottomToolbar: SC.NavigationBarView.design(SC.Animatable, Multivio.FadeInOut, {
     childViews: ['previousButton', 'nextButton', 'rotateRightButton', 'rotateLeftButton', 'nextZoomButton', 'previousZoomButton', 'nextPageButton', 'previousPageButton', 'fitWidthButton', 'fitAllButton'],
-    classNames: "mvo-front-view-transparent".w(),
+    classNames: "mvo-bottom-toolbar mvo-front-view-transparent".w(),
     layout: { centerX: 0, width: 410, height: 48, bottom: 20 },
     //acceptsFirstResponder: NO,
     

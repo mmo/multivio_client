@@ -14,12 +14,13 @@
 */
 Multivio.TitleView = SC.View.extend({
 
-  layout: {bottom: 0, left: 10, height: 30, right: 10},
+  layout: {bottom: 0, left: 10, height: 36, right: 10},
+  classNames: 'mvo-title-view'.w(),
   childViews: 'titleLabel'.w(),
 
   titleLabel: SC.LabelView.design({
-    layout: { width: 500, height: 18 },
-    classNames: 'metadata'.w(),
+    layout: { top: 5, left: 5, right: 5 },
+    classNames: 'mvo-title-label metadata'.w(),
     value: "Welcome on pdfView",
     contentBinding: 'Multivio.rootNodeController',
     contentValueKey: 'title'

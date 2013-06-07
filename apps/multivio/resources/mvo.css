@@ -50,8 +50,8 @@ Multivio specific styles
 /*.sc-container-view {
   background: none repeat scroll 0 0 #666;
 }*/
-
-/*.mvo-center-image {
+/*
+.mvo-center-image {
   box-shadow: 5px 5px 5px #333;
   -moz-box-shadow: 5px 5px 5px #333;
   -webkit-box-shadow: 5px 5px 5px #333;
@@ -61,7 +61,11 @@ Multivio specific styles
 .mvo-center-image .sc-collection-view {
 	background: none;
 }
-/*
+
+.mvo-content-view {
+  padding: 20px;
+}
+
 .mvo-search-results {
   opacity: 0.50;
   -moz-opacity: 0.50;
@@ -69,6 +73,7 @@ Multivio specific styles
   filter: alpha(opacity=50);
   background-color: olive;
 }
+/*
 .mvo-search-results.sc-collection-item.sel {
   background: none repeat scroll 0 0 #ccc;
 }
@@ -88,26 +93,15 @@ Multivio specific styles
   vertical-align: middle;
 }
 
-/*
-#mvo-navigation-bar .sc-list-item-view img {
-  padding: 4px;
-}
-*/
-#mvo-navigation-bar {
+$theme.mvo-navigation-bar {
   background: none repeat scroll 0 0 #444;
   border:none;
 }
-/*
-#mvo-navigation-bar .sc-list-item-view.sel {
+
+/*.sc-list-item-view.sel img {
   background: none repeat scroll 0 0 #ccc;
-  border:none;
 }
 */
-
-.sc-list-item-view.sel img {
-  background: none repeat scroll 0 0 #ccc;
-}
-
 .sc-list-item-view p{
   line-height: 30px;
   vertical-align: middle;
@@ -132,10 +126,9 @@ Multivio specific styles
   width: 20px;
   height: 20px;
 }
-.mvo-center {
-  border: 3px solid #aaa;
+
+$theme.mvo-center-view {
   background: none repeat scroll 0 0 #666;
-  padding: 20px;
 }
 
 $theme.mvo-front-view-transparent {
@@ -155,38 +148,35 @@ Button layout
 -----------------------------
 */
 
-.toolbar .sc-button-view .img {
+$theme.mvo-button-view .img {
   width: 24px;
   height: 24px;
   margin: 4px;
+  padding: 0px;
   cursor: pointer;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.toolbar .sc-image-button-view {
-  background: none;
+$theme.mvo-button-view.sc-collection-item.sel,
+.sc-image-button-view.sel {
+  background: none repeat scroll 0 0 #777;
+  background-image: none;
+  border: none;
+  border-radius: 4px;
 }
 
-input {
-height: 24px;
-}
-label {
-	color: #000;
-}
 .sc-image-button-view .img {
   padding: 0px;
   cursor: pointer;
   background-position: center center;
   background-repeat: no-repeat;
 }
+
 /*.toolbar .sc-image-button-view.active .img, .sc-image-button-view.sel .img {
   background: none repeat scroll 0 0 lightSteelBlue;
 }
 */
-
-$theme.sc-button-view.sel {
-  background-color: #777;
-  border-radius: 4px;
-}
 
 .toolbar .sc-image-button-view.disabled .img {
   opacity: 0.3;

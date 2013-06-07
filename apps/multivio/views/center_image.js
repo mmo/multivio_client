@@ -8,12 +8,14 @@
 
 /** @class
 
-(Document Your View Here)
+  This is the main visual content displayed by the application. It currently supports only
+  image-based content, either image native formats or those obtained from PDF page
+  rendering
 
 @extends SC.View
 */
 Multivio.CenterImage = SC.View.extend({
-  layout: {top: 5, right: 5, bottom: 5, left: 5},
+  layout: {top: 0, right: 0, bottom: 0, left: 0},
   childViews: ['infoPanel', 'imageView', 'selectionView'],
   classNames: "mvo-center-image".w(),
   visibleWidth: 0,
@@ -21,51 +23,44 @@ Multivio.CenterImage = SC.View.extend({
   image: null,
   imageBinding: "*imageView.image",
 
-  imageDidLoad: function () {
-    var img_height = this.get('image').height;
-    var img_width = this.get('image').width;
-    var parent_width = this.get('visibleWidth');
-    var parent_height = this.get('visibleHeight');
-    var _layout = {};
-    if (img_height > 1 && img_width > 1) {
-      _layout.width = img_width;
-      _layout.height = img_height;
-      if (parent_width > img_width) {
-        _layout.centerX = 0;
-      } else {
-        _layout.left = 0;
-      }
-      if (parent_height > img_height) {
-        _layout.centerY = 0;
-      } else {
-        _layout.top = 0;
-      }
-      this.set('layout', _layout);
-      this.notifyPropertyChange("layer");
-      SC.Logger.debug('ImageView updated');
-    }
-  }.observes('image'),
+  imageView : SC.ImageView.design({
+    classNames: "mvo-image-view".w(),
+    layout: {left: 0, right: 0, top: 0, bottom: 0},
+    canLoadInBackground: YES,
+    imageDidLoad: function (url, imageOrError) {
+      //TODO: why do I have to adjust width/height as the layout is defined to
+      //take all the stuffs!
+      this.adjust('width', this.get('image').width);
+      this.adjust('height', this.get('image').height);
+    }.observes('image'),
 
-  parentViewDidResize: function () {
-    sc_super();
-    this.set('visibleHeight', this.getPath('parentView.frame').height);
-    this.set('visibleWidth', this.getPath('parentView.frame').width);
-  },
+    //redifined this default method in order remove the defaultBlankImage
+    _image_valueDidChange: function () {
+      var value = this.get('imageValue');
+      var type = this.get('type');
 
-  infoPanel: SC.NavigationBarView.design(SC.Animatable, Multivio.FadeInOut, {
-    classNames: "mvo-front-view-transparent".w(),
-    layout: { centerX: 0, width: 100, height: 30, top: 16 },
-    childViews: ['textView'],
-    textView: SC.LabelView.design({
-      layout: { centerY: 0, centerX: 0, width: 80, height: 20 },
-      textAlign: 'center',
-      value: null
-      //valueBinding: 'Multivio.pdfFileController.infoMessage'
-    })
+      // check to see if our value has changed
+      if (value !== this._iv_value) {
+        this._iv_value = value;
+
+        //this.set('image', SC.BLANK_IMAGE);
+
+        if (type !== SC.IMAGE_TYPE_CSS_CLASS) {
+          // While the new image is loading use SC.BLANK_IMAGE as a placeholder
+          this.set('status', SC.IMAGE_STATE_LOADING);
+
+          // order: image cache, normal load
+          if (!this._loadImageUsingCache()) {
+            this._loadImage();
+          }
+        }
+      }
+    }.observes('imageValue').cacheable()
   }),
 
   selectionView: SC.CollectionView.design({
     layout: {left: 0, right: 0, top: 0, bottom: 0},
+    classNames: 'mvo-selection-view'.w(),
     nativeSize: null,
     rotationAngle: null,
 
@@ -149,38 +144,46 @@ Multivio.CenterImage = SC.View.extend({
     })
   }),
 
-  imageView : SC.ImageView.design({
-    classNames: "mvo-page".w(),
-    layout: {left: 0, right: 0, top: 0, bottom: 0},
-    canLoadInBackground: YES,
-    imageDidLoad: function (url, imageOrError) {
-      //TODO: why do I have to adjust width/height as the layout is defined to
-      //take all the stuffs!
-      this.adjust('width', this.get('image').width);
-      this.adjust('height', this.get('image').height);
-    }.observes('image'),
+  infoPanel: SC.NavigationBarView.design(SC.Animatable, Multivio.FadeInOut, {
+    classNames: "mvo-info-panel mvo-front-view-transparent".w(),
+    layout: { centerX: 0, width: 100, height: 30, top: 16 },
+    childViews: ['textView'],
+    textView: SC.LabelView.design({
+      layout: { centerY: 0, centerX: 0, width: 80, height: 20 },
+      textAlign: 'center',
+      value: null
+      //valueBinding: 'Multivio.pdfFileController.infoMessage'
+    })
+  }),
 
-    //redifined this default method in order remove the defaultBlankImage
-    _image_valueDidChange: function () {
-      var value = this.get('imageValue');
-      var type = this.get('type');
-
-      // check to see if our value has changed
-      if (value !== this._iv_value) {
-        this._iv_value = value;
-
-        //this.set('image', SC.BLANK_IMAGE);
-
-        if (type !== SC.IMAGE_TYPE_CSS_CLASS) {
-          // While the new image is loading use SC.BLANK_IMAGE as a placeholder
-          this.set('status', SC.IMAGE_STATE_LOADING);
-
-          // order: image cache, normal load
-          if (!this._loadImageUsingCache()) {
-            this._loadImage();
-          }
-        }
+  imageDidLoad: function () {
+    var img_height = this.get('image').height;
+    var img_width = this.get('image').width;
+    var parent_width = this.get('visibleWidth');
+    var parent_height = this.get('visibleHeight');
+    var _layout = {};
+    if (img_height > 1 && img_width > 1) {
+      _layout.width = img_width;
+      _layout.height = img_height;
+      if (parent_width > img_width) {
+        _layout.centerX = 0;
+      } else {
+        _layout.left = 0;
       }
-    }.observes('imageValue').cacheable()
-  })
+      if (parent_height > img_height) {
+        _layout.centerY = 0;
+      } else {
+        _layout.top = 0;
+      }
+      this.set('layout', _layout);
+      this.notifyPropertyChange("layer");
+      SC.Logger.debug('ImageView updated');
+    }
+  }.observes('image'),
+
+  parentViewDidResize: function () {
+    sc_super();
+    this.set('visibleHeight', this.getPath('parentView.frame').height);
+    this.set('visibleWidth', this.getPath('parentView.frame').width);
+  }
 });

@@ -43,7 +43,7 @@ Multivio.navigationController = SC.ArrayController.create({
     }),
     
     SC.Object.create({
-      panel: 'mainPage.mainPane.centerView.contentView.bottomToolbar',
+      panel: 'mainPage.mainPane.centerView.mainContentView.contentView.bottomToolbar',
       icon: static_url("images/icons/24x24/show_toolbar_light_24x24.png")
       //action: 'showBottomToolbar'
     }),

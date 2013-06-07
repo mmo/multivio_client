@@ -11,6 +11,7 @@ sc_require('views/center_image.js');
 sc_require('controllers/pdf.js');
 
 Multivio.mainPdfView =  SC.View.design({
+  classNames: 'mvo-main-pdf-view'.w(),
   childViews: ['waitingView', 'pdfScrollView', 'bottomToolbar'], 
   acceptsFirstResponder: YES,
   keyDown: function (evt) {
@@ -46,8 +47,8 @@ Multivio.mainPdfView =  SC.View.design({
 
 
   pdfScrollView: SC.ScrollView.design({
-    classNames: "mvo-center".w(),
-    layout: { top: 5, left: 5, bottom: 5, right: 5},
+    classNames: "mvo-pdf-scroll-view".w(),
+    layout: { top: 0, left: 0, bottom: 0, right: 0},
     contentView: Multivio.CenterImage.design({
       layout: { centerX: 0, centerY: 0 },
       init: function () {

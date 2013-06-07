@@ -16,8 +16,8 @@ Multivio.NavigationItem = SC.ListItemView.extend({
 
   // TODO: Add your own code here.
   displayProperties: ['icon', 'panel'],
-  classNames: 'sc-button-view'.w(),
-  layout: {height: 40, centerX: 0, centerY: 0, width: 40},
+  classNames: 'mvo-navigation-item mvo-button-view'.w(),
+  layout: {height: 32, centerX: 0, centerY: 0, width: 32},
   mouseEntered: function () {
     var jquery = this.$();
     jquery.css('cursor', 'pointer');
@@ -32,9 +32,8 @@ Multivio.NavigationItem = SC.ListItemView.extend({
   },
   render: function (context) {
     var content = this.get('content');
-
-    context.push('<img src="', content.get('icon'), '"/>');
-    //context.push('<p>',content.get('panel'), '</p>');
+    var style = 'margin: 4px;';
+    context.push('<img style="', style,'" src="', content.get('icon'), '"/>');
   },
   update: function (jquery) {
     jquery.find('h1').text(this.get('url'));

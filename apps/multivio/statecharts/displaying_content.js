@@ -152,7 +152,7 @@ Multivio.DisplayingContentState = SC.State.extend({
 
     /** */
     enterState: function (fileNode) {
-      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView');
+      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView.mainContentView');
       
       //a pdf was already displayed
       if (viewToChange.get('nowShowing') !== 'mainPdfView') {
@@ -237,7 +237,7 @@ Multivio.DisplayingContentState = SC.State.extend({
 
     /** */
     enterState: function (fileNode) {
-      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView');
+      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView.mainContentView');
       if (viewToChange.get('nowShowing') !== 'mainImageView') {
         viewToChange.set('nowShowing', 'mainImageView');
         Multivio.getPath('mainPage.mainImageView').becomeFirstResponder();
@@ -275,7 +275,7 @@ Multivio.DisplayingContentState = SC.State.extend({
 
     /** */
     enterState: function () {
-      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView');
+      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView.mainContentView');
       if (viewToChange.get('nowShowing') !== 'unsupportedFileView') {
         viewToChange.set('nowShowing', 'unsupportedFileView');
       }

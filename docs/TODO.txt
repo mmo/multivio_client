@@ -26,6 +26,9 @@
 - add unit tests
 - rewrite root README in MarkDown
 - update loading pages (Multivio.loadingPage and loading.rhtml)
+- factorize toolbar view from image/pdf/... views
+- consistently name views (adjust "View"/"Page"/"Pane" suffix and file names)
+- CSS: remove all classes starting with '.sc-*' (use '.mvo-' instead, together with the 'classNames' property in the views)
 
 
 ## DONE
