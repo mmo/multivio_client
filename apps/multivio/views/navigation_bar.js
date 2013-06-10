@@ -18,7 +18,7 @@ sc_require('controllers/navigation.js');
 Multivio.NavigationBar = SC.SourceListView.design({
   classNames: 'mvo-navigation-bar'.w(),
   allowDeselectAll: YES,
-  useToggleSelection: YES,
+  useToggleSelection: NO,
   acceptsFirstResponder: NO,
   selectOnMouseDown: YES,
   layout: { top: 12, left: 4, bottom: 40, width: 32},
@@ -36,25 +36,25 @@ Multivio.NavigationBar = SC.SourceListView.design({
   },
 
   //bug correction
-  mouseDown: function (ev) {
-    var status = sc_super();
-    var itemView      = this.itemViewForEvent(ev);
-    SC.Logger.debug('hello');
-    // recieved a mouseDown on the collection element, but not on one of the 
-    // childItems... unless we do not allow empty selections, set it to empty.
-    // Toggle the selection if selectOnMouseDown is true
-    if (this.get('useToggleSelection')) {
-      if (this.get('selectOnMouseDown')) {
-        if (!itemView) {
-          if (this.get('allowDeselectAll')) {
-            this.select(null, false);
-          }
-          return YES;
-        }
-      }
-    }
-    return status;
-  },
+  // mouseDown: function (ev) {
+  //   var status = sc_super();
+  //   var itemView      = this.itemViewForEvent(ev);
+  //   SC.Logger.debug('hello');
+  //   // recieved a mouseDown on the collection element, but not on one of the 
+  //   // childItems... unless we do not allow empty selections, set it to empty.
+  //   // Toggle the selection if selectOnMouseDown is true
+  //   if (this.get('useToggleSelection')) {
+  //     if (this.get('selectOnMouseDown')) {
+  //       if (!itemView) {
+  //         if (this.get('allowDeselectAll')) {
+  //           this.select(null, false);
+  //         }
+  //         return YES;
+  //       }
+  //     }
+  //   }
+  //   return status;
+  // },
 
   _didChange: function () {
     SC.Logger.debug('itemView: changed'); 

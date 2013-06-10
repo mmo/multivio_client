@@ -15,8 +15,6 @@
 Multivio.ServerRecord = SC.Record.extend({
   /** @scope Multivio.ServerRecord.prototype */
 
-  // TODO: Add your own code here.
-  //
   name: SC.Record.attr(String),
   api_version: SC.Record.attr(String),
   version: SC.Record.attr(Number),

@@ -18,7 +18,6 @@ sc_require('controllers/tree.js');
 
 Multivio.TreeViewItem = SC.ListItemView.extend(SC.AutoResize, {
 
-  // TODO: Add your own code here.
   classNames: ['mvo-toc-entry'],
   supportsAutoResize: YES,
   displayProperties: ['title', 'icon'],
@@ -30,15 +29,14 @@ Multivio.TreeViewItem = SC.ListItemView.extend(SC.AutoResize, {
     return content.get('icon') ? YES : NO;
   }.property('content.icon'),
 
-
   autoResizeText: function () {
     return this.getPath('content.title');
   }.property('content'),
-
+  
   autoResizeLayer: function () {
     return this.get('layer');
   }.property(),
-
+  
   autoResizePadding: function () {
     var width = 0;
     width = this.get('iconWidth') + (this.get('outlineLevel') + 1) * this.get('outlineIndent');
@@ -60,8 +58,8 @@ Multivio.TreeView = SC.PalettePane.design({
   layout: {left: 45, top: 10, width: 314, bottom: 100},
   classNames: 'mvo-palette-pane'.w(),
   layerId: 'mvo-tree-view',
-  canBeClosed: YES,
   contentView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
+    layout: { left: 3, top: 3, right: 3, bottom: 3 },
     contentView: SC.SourceListView.design({
       rowHeight: 18,
       rowSpacing: 4,
@@ -72,12 +70,10 @@ Multivio.TreeView = SC.PalettePane.design({
       contentBinding: 'Multivio.treeController.arrangedObjects',
       selectionBinding: 'Multivio.treeController.selection',
       exampleView: Multivio.TreeViewItem
-
     })
   }),
 
   modalPaneDidClick: function (evt) {
     return this.get('canBeClosed') ? sc_super() : NO;
   }
-
 });

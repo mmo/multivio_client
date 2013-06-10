@@ -9,7 +9,7 @@
 body {
   background: none repeat scroll 0 0 #fff;
   font-size: 12px;
-  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  font-family: Helvetica, Arial, Geneva, sans-serif;
   min-height: 300px;
   min-width: 300px;
 }
@@ -19,12 +19,11 @@ $theme.mvo-main-pane {
   color: #fff;
 }
 
-/*$theme.source-list.collection,
+$theme.source-list.collection,
 $theme.sc-grid-view.collection {
   background: none repeat scroll 0 0 #ccc;
   color: #000;
 }
-*/
 
 /*
 -----------------------------
@@ -39,9 +38,15 @@ Multivio specific styles
   height: 24px;
 }
 
-/*.sc-pane.sc-panel.mvo-palette-pane .sc-scroll-view {
-  border: 2px solid #fff;
-}*/
+$theme.sc-view {
+  font-family: Helvetica, Arial, Geneva, sans-serif;
+  font-size: 12px;
+}
+
+$theme.mvo-palette-pane {
+/*  border: 1px solid #ccc;
+  background-color: #fff;
+*/}
 
 /*.sc-scroll-view {
   background: none repeat scroll 0 0 blue;
@@ -77,13 +82,20 @@ Multivio specific styles
 .mvo-search-results.sc-collection-item.sel {
   background: none repeat scroll 0 0 #ccc;
 }
+*/
 #mvo-tree-view .mvo-toc-entry label {
-  font-size: 11px;
+  font-size: 12px;
 }
+/*
 #mvo-thumbnails .sc-collection-item.sel {
   background: none repeat scroll 0 0 #608AB9;
 }
 */
+
+$theme.mvo-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+}
 
 .sc-list-item-view img {
   display: block;
@@ -93,7 +105,7 @@ Multivio specific styles
   vertical-align: middle;
 }
 
-$theme.mvo-navigation-bar {
+#mvo-navigation-bar {
   background: none repeat scroll 0 0 #444;
   border:none;
 }
@@ -134,6 +146,7 @@ $theme.mvo-center-view {
 $theme.mvo-front-view-transparent {
   background: sc_static("images/transparency_ddd_90.png") repeat scroll 0 0 transparent;
   border: none;
+  border-radius: 4px;
   /*z-index: -10000;*/
 }
 
@@ -156,6 +169,11 @@ $theme.mvo-button-view .img {
   cursor: pointer;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+$theme.sc-collection-item.sel,
+$theme.sc-list-item-view.sc-collection-item.sel {
+  background-image: none;
 }
 
 $theme.mvo-button-view.sc-collection-item.sel,

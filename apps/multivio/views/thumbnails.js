@@ -24,7 +24,7 @@ Multivio.thumbnailsView = SC.PalettePane.design({
     ],
 
     thumbnailScrollView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
-      layout: { left: 0, top: 0, right: 0, bottom: 42 },
+      layout: { left: 3, top: 3, right: 3, bottom: 44 },
       contentView: SC.GridView.design({
         layerId: 'mvo-thumbnails',
         contentValueKey: 'pageNumber',
@@ -50,7 +50,7 @@ Multivio.thumbnailsView = SC.PalettePane.design({
     }),
 
     thumbnailListModeButtom: SC.ImageButtonView.design({
-      layout: { height: 32, bottom: 4, width: 32, left: 2 },
+      layout: { height: 32, bottom: 4, width: 32, left: 4 },
       image: 'thumbnail_list_mode',
       title: 'thumbnailListMode',
       buttonBehavior: SC.TOGGLE_ON_BEHAVIOR,
@@ -60,10 +60,10 @@ Multivio.thumbnailsView = SC.PalettePane.design({
     }),
 
     thumbnailGridModeButtom: SC.ImageButtonView.design({
-      layout: { height: 32, bottom: 4, width: 32, left: 36 },
+      layout: { height: 32, bottom: 4, width: 32, left: 40 },
+      image: 'thumbnail_grid_mode',
       name: 'thumbnailGridMode',
       toolTip: '_ThumbnailGridMode'.loc(),
-      image: 'thumbnail_grid_mode',
       valueBinding: 'Multivio.currentThumbnailController.thumbnailMode',
       buttonBehavior: SC.TOGGLE_ON_BEHAVIOR,
       toggleOnValue: 'grid'

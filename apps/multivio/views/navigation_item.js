@@ -14,7 +14,6 @@
 */
 Multivio.NavigationItem = SC.ListItemView.extend({
 
-  // TODO: Add your own code here.
   displayProperties: ['icon', 'panel'],
   classNames: 'mvo-navigation-item mvo-button-view'.w(),
   layout: {height: 32, centerX: 0, centerY: 0, width: 32},

@@ -15,9 +15,8 @@
 sc_require('mixins/interface.js');
 sc_require('controllers/tree.js');
 
-Multivio.SearchViewItem = SC.ListItemView.extend(SC.AutoResize, {
+Multivio.SearchViewItem = SC.ListItemView.extend({
 
-  // TODO: Add your own code here.
   escapeHTML: NO,
   displayProperties: ['label'],
   //layout: {height: 40, centerX: 0, centerY: 0, width: 200}
@@ -60,12 +59,13 @@ Multivio.SearchView = SC.PalettePane.design({
     childViews: [
       'messageLabelView', 'searchQueryView',
       'findAllView', 'labelView',
+      'nextResultButtonView', 'previousResultButtonView',
       'resultsScrollView', 'waitingView'
     ],
     //'previousResultButtonView', 'nextResultButtonView', 'resultsScrollView',
 
     searchQueryView: SC.TextFieldView.design({
-      layout: { top: 0, left: 0, right: 0, height: 24 },
+      layout: { top: 3, left: 3, right: 3, height: 24 },
       applyImmediately: NO,
       hintBinding: 'Multivio.searchTreeController.defaultQueryMessage',
       valueBinding: 'Multivio.searchTreeController.currentUserQuery',
@@ -106,7 +106,7 @@ Multivio.SearchView = SC.PalettePane.design({
     }),
 
     findAllView: SC.CheckboxView.design({
-      layout: { top: 24, left: 0, width: 20, height: 20 },
+      layout: { top: 32, left: 4, width: 20, height: 20 },
       toggleOffValue: NO,
       toggleOnValue: YES,
       isEnabledBinding: SC.Binding.oneWay('Multivio.searchTreeController.isLoading').not(),
@@ -114,12 +114,28 @@ Multivio.SearchView = SC.PalettePane.design({
     }),
 
     labelView: SC.LabelView.design({
-      layout: { top: 24, left: 22, right: 0, height: 20 },
-      value: "Search to all"
+      layout: { top: 32, left: 28, right: 0, height: 20 },
+      value: "Search in all files"
+    }),
+
+    nextResultButtonView: SC.ImageButtonView.design({
+      layout: { top: 44, height: 20, width: 20, right: 24 },
+      image: 'image-button-down-16',
+      title: 'searchNext',
+      target: 'Multivio.searchTreeController',
+      action: 'goToNextResult'
+    }),
+
+    previousResultButtonView: SC.ImageButtonView.design({
+      layout: { top: 44, height: 20, width: 20, right: 4 },
+      image: 'image-button-up-16',
+      title: 'searchPrevious',
+      target: 'Multivio.searchTreeController',
+      action: 'goToPreviousResult'
     }),
 
     resultsScrollView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
-      layout: { top: 44, left: 0, right: 0, bottom: 20 },
+      layout: { top: 70, left: 3, right: 3, bottom: 32 },
       contentView: SC.SourceListView.design({
         rowHeight: 18,
         rowSpacing: 4,
@@ -134,21 +150,6 @@ Multivio.SearchView = SC.PalettePane.design({
     }),
 
 /*
-nextResultButtonView: SC.ImageButtonView.design({
-layout: { top: 70, height: 20, width: 20, right: 0 },
-image: 'image-button-down-16',
-title: 'searchNext',
-target: 'Multivio.searchTreeController',
-action: 'goToNextResult'
-}),
-
-previousResultButtonView: SC.ImageButtonView.design({
-layout: { top: 70, height: 20, width: 20, right: 24 },
-image: 'image-button-up-16',
-title: 'searchPrevious',
-target: 'Multivio.searchTreeController',
-action: 'goToPreviousResult'
-}),
 searchScopeView : SC.SelectButtonView.design({
 layout: { top: 36, left: 0, right: 0, height: 25 },
 isEnabledBinding: 'Multivio.searchTreeController.allowsSelection',    
@@ -166,11 +167,9 @@ supportFocusRing: NO
 */
 
     waitingView: SC.ImageView.design({
-      layout: { bottom: 0, right: 0, width: 20, height: 20 },
-
+      layout: { bottom: 6, left: 4, width: 20, height: 20 },
       //canvas do not work with animated gifs
       useCanvas: NO,
-
       isVisible: YES,
       isVisibleBinding: 'Multivio.searchTreeController.isLoading',
       value: static_url('images/progress_wheel_medium.gif'),
@@ -178,9 +177,8 @@ supportFocusRing: NO
     }),
 
     messageLabelView: SC.LabelView.design({
-      layout: { bottom: 0, left: 0, right: 22, height: 20 },
-      textAlign: SC.ALIGN_RIGHT,
-      classNames: 'message',
+      layout: { bottom: 0, left: 28, right: 22, height: 24 },
+      classNames: 'mvo-overflow'.w(),
       valueBinding: 'Multivio.searchTreeController.msgStatus'
     })
 

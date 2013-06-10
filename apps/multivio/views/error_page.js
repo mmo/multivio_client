@@ -17,7 +17,7 @@ Multivio.errorPage = SC.Page.design({
 
     labelView: SC.LabelView.design({
       layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
-      textAlign: SC.ALIGN_CENTER,
+      classNames: 'mvo-center',
       tagName: "h1",
       valueBinding: SC.Binding.oneWay('Multivio.errorController.errorMessage')
     }),

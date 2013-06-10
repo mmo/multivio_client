@@ -65,29 +65,29 @@ Multivio.mainPdfView =  SC.View.design({
 
 
   bottomToolbar: SC.NavigationBarView.design(SC.Animatable, Multivio.FadeInOut, {
-    childViews: ['previousButton', 'nextButton', 'rotateRightButton', 'rotateLeftButton', 'nextZoomButton', 'previousZoomButton', 'nextPageButton', 'pageEntry', 'previousPageButton', 'fitWidthButton', 'fitAllButton', 'hundredPercentButton', 'overviewButton'],
+    childViews: [
+      'overviewButton',
+      'rotateLeftButton', 'rotateRightButton',
+      'previousPageButton', 'previousButton', 'pageEntry', 'nextButton', 'nextPageButton',
+      'previousZoomButton', 'nextZoomButton',
+      'fitWidthButton', 'fitAllButton', 'hundredPercentButton'],
     classNames: "mvo-front-view-transparent".w(),
-    layout: { centerX: 0, width: 530, height: 48, bottom: 20 },
+    layout: { centerX: 0, width: 640, height: 48, bottom: 20 },
     acceptsFirstResponder: NO,
     
-    previousButton: SC.ImageButtonView.design({
-      image: 'image-button-previous-doc',
-      layout: {centerY: 0,  left: 10, width: 32, height: 32 },
-      action: 'goToPreviousFile',
-      title: '<<',
-      isEnabledBinding: "Multivio.pdfFileController.hasPreviousFile"
+    overviewButton: SC.ImageButtonView.design({
+      layout: {centerY: 0, centerX: -230, width: 32, height: 32 },
+      image: 'image-button-overview',
+      buttonBehavior: SC.TOGGLE_BEHAVIOR,
+      toggleOffValue: NO,
+      toggleOnValue: YES,
+      //value: null,
+      valueBinding: 'Multivio.overviewController.showPalette',
+      title: 'overview'
     }),
 
-    nextButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 40, width: 32,  height: 32 },
-      image: 'image-button-next-doc',
-      action: 'goToNextFile',
-      isEnabledBinding: "Multivio.pdfFileController.hasNextFile",
-      title: '>>'
-    }),
-    
     rotateLeftButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 100, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: -170, width: 32, height: 32 },
       image: 'image-button-rotate-left',
       target: 'Multivio.pdfFileController',
       action: 'rotateLeft',
@@ -95,14 +95,21 @@ Multivio.mainPdfView =  SC.View.design({
     }),
     rotateRightButton: SC.ImageButtonView.design({
       image: 'image-button-rotate-right',
-      layout: {centerY: 0,  left: 130, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: -140, width: 32, height: 32 },
       target: 'Multivio.pdfFileController',
       action: 'rotateRight',
       title: '+'
     }),
 
+    previousButton: SC.ImageButtonView.design({
+      image: 'image-button-previous-doc',
+      layout: {centerY: 0, centerX: -80, width: 32, height: 32 },
+      action: 'goToPreviousFile',
+      title: '<<',
+      isEnabledBinding: "Multivio.pdfFileController.hasPreviousFile"
+    }),
     previousPageButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 180, width: 32, height: 32 },
+      layout: {centerY: 0,  centerX: -50, width: 32, height: 32 },
       image: 'image-button-previous-page',
       //target: 'Multivio.pdfFileController',
       action: 'goToPreviousIndex',
@@ -111,7 +118,7 @@ Multivio.mainPdfView =  SC.View.design({
     }),
 
     pageEntry: SC.TextFieldView.design({
-      layout: {centerY: 0,  left: 210, width: 50, height: 24 },
+      layout: {centerY: 0, centerX: 0, width: 50, height: 24 },
       acceptsFirstResponder: NO,
       isTextArea: NO,
       applyImmediately: NO,
@@ -139,16 +146,23 @@ Multivio.mainPdfView =  SC.View.design({
     }),
 
     nextPageButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 260, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: 50, width: 32, height: 32 },
       image: 'image-button-next-page',
       //target: 'Multivio.pdfFileController',
       action: 'goToNextIndex',
       isEnabledBinding: 'Multivio.pdfFileController.hasNextIndex',
       title: '>'
     }),
+    nextButton: SC.ImageButtonView.design({
+      layout: {centerY: 0,  centerX: 80, width: 32,  height: 32 },
+      image: 'image-button-next-doc',
+      action: 'goToNextFile',
+      isEnabledBinding: "Multivio.pdfFileController.hasNextFile",
+      title: '>>'
+    }),
 
     previousZoomButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 310, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: 140, width: 32, height: 32 },
       image: 'image-button-zoom-minus',
       target: 'Multivio.pdfFileController',
       action: 'previousZoom',
@@ -157,10 +171,8 @@ Multivio.mainPdfView =  SC.View.design({
       isEnabledBinding: 'Multivio.pdfFileController.hasPreviousZoom',
       title: 'z-'
     }),
-    
-
     nextZoomButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 340, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: 170, width: 32, height: 32 },
       image: 'image-button-zoom-plus',
       target: 'Multivio.pdfFileController',
       action: 'nextZoom',
@@ -170,7 +182,7 @@ Multivio.mainPdfView =  SC.View.design({
     }),
 
     fitAllButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 390, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: 230, width: 32, height: 32 },
       image: 'image-button-fit-all',
       buttonBehavior: SC.TOGGLE_BEHAVIOR,
       toggleOffValue: NO,
@@ -179,7 +191,7 @@ Multivio.mainPdfView =  SC.View.design({
       title: 'all'
     }),
     fitWidthButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 420, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: 260, width: 32, height: 32 },
       image: 'image-button-fit-width',
       buttonBehavior: SC.TOGGLE_BEHAVIOR,
       toggleOffValue: NO,
@@ -188,23 +200,13 @@ Multivio.mainPdfView =  SC.View.design({
       title: 'width'
     }),
     hundredPercentButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 450, width: 32, height: 32 },
+      layout: {centerY: 0, centerX: 290, width: 32, height: 32 },
       image: 'image-button-hundred-percent',
       target: 'Multivio.pdfFileController',
       action: 'hundredPercentZoom',
       keyEquivalent: '=',
       isEnabledBinding: 'Multivio.pdfFileController.hundredPercentZoomEnabled',
       title: 'hundred'
-    }),
-    overviewButton: SC.ImageButtonView.design({
-      layout: {centerY: 0,  left: 490, width: 32, height: 32 },
-      image: 'image-button-overview',
-      buttonBehavior: SC.TOGGLE_BEHAVIOR,
-      toggleOffValue: NO,
-      toggleOnValue: YES,
-      //value: null,
-      valueBinding: 'Multivio.overviewController.showPalette',
-      title: 'overview'
     })
   })
 });

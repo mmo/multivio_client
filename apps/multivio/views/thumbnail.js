@@ -14,8 +14,6 @@
 */
 Multivio.thumbnailView = SC.ListItemView.extend({
 
-  // TODO: Add your own code here.
-  //
   displayProperties: ['url', 'pageNumber'],
   //contentIconKey: 'url',
   //contentRightIconKey: 'url'

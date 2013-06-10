@@ -15,7 +15,6 @@
 - themes + appearance (1day)
 - API (1 day)
 - tests and IE (5 days)
-- grid thumbnails (1/2 day)
 
 
 ## Related to code review and documentation
@@ -29,6 +28,7 @@
 - factorize toolbar view from image/pdf/... views
 - consistently name views (adjust "View"/"Page"/"Pane" suffix and file names)
 - CSS: remove all classes starting with '.sc-*' (use '.mvo-' instead, together with the 'classNames' property in the views)
+- rename 'toolbar' -> 'navigation toolbar' and 'navigation bar' -> 'side toolbar'
 
 
 ## DONE
@@ -40,3 +40,4 @@
 - search (1day)
 - go to page
 - 100%
+- grid thumbnails (1/2 day)

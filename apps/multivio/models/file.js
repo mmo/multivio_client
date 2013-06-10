@@ -564,7 +564,7 @@ Multivio.FileRecord = SC.Record.extend({
   }.property('numberOfSearchResults', 'treeItemChildren', 'searchResults').cacheable(),
   
   label: function () {
-    return this.get('numberOfSearchResults') ? "%@ (%@)".fmt(this.get('title'), this.get('numberOfSearchResults')) : "Not Results";
+    return this.get('numberOfSearchResults') ? "%@ (%@)".fmt(this.get('title'), this.get('numberOfSearchResults')) : "No Results";
   }.property('title', 'numberOfSearchResults').cacheable(),
 
   updateParentSearchResults: function (value) {

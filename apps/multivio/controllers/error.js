@@ -18,7 +18,6 @@
 
 Multivio.errorController = SC.ObjectController.create({
 
-  // TODO: Add your own code here.
   errorMessage: 'unexpectedError'
 
 });

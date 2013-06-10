@@ -15,12 +15,12 @@ Multivio.HelpPane = SC.PalettePane.design({
   layout: { left: 45, top: 10, width: 320, bottom: 100 },
   classNames: 'mvo-palette-pane'.w(),
   contentView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
-    layout: { top: 2, bottom: 2, left: 2, right: 2 },
+    layout: { top: 3, bottom: 3, left: 3, right: 3 },
     borderStyle: SC.BORDER_NONE,
     hasHorizontalScroller: NO,
     //contentView: SC.StaticContentView.design({
     contentView: SC.StaticContentView.design({
-      //layout: {top: 2, width:300},
+      layout: { top: 12, bottom: 12, left: 12, right: 120 },
       classNames: "help-panel".w(),
       //escapeHTML: NO,
       content : '<h1>' + '_helpTitle'.loc() + '</h1>'
