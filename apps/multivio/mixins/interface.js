@@ -23,9 +23,8 @@
   @since 0.3.0
 */
 Multivio.innerGradient = {
-  render: function (context, firstTime) {
+  renderMixin: function (context, firstTime) {
     if (context.needsContent) {
-      this.renderChildViews(context, firstTime);
       context.push(
         "<div class='top-edge'></div>",
         "<div class='right-edge'></div>",
@@ -47,9 +46,8 @@ Multivio.innerGradient = {
   @since 0.3.0
 */
 Multivio.innerGradientThinTopBottom = {
-  render: function (context, firstTime) {
+  renderMixin: function (context, firstTime) {
     if (context.needsContent) {
-      this.renderChildViews(context, firstTime);
       context.push(
         "<div class='top-edge-thin'></div>",
         "<div class='right-edge-thin'></div>",
@@ -83,9 +81,8 @@ Multivio.innerGradientThinTopBottom = {
   @since 0.3.0
 */
 Multivio.outerGradient = {
-  render: function (context, firstTime) {
+  renderMixin: function (context, firstTime) {
     if (context.needsContent) {
-      this.renderChildViews(context, firstTime);
       context.push(
         "<div class='outer-top-left-edge'></div>",
         "<div class='outer-top-edge'></div>",
