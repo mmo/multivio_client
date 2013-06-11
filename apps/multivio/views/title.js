@@ -14,7 +14,7 @@
 */
 Multivio.TitleView = SC.View.extend({
 
-  layout: {bottom: 0, left: 10, height: 36, right: 10},
+  layout: {bottom: 0, left: 36, height: 36, right: 10},
   classNames: 'mvo-title-view'.w(),
   childViews: 'titleLabel'.w(),
 
