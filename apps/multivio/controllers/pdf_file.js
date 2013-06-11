@@ -6,7 +6,7 @@
 ==============================================================================
 */
 
-sc_require('views/pdf_view.js');
+sc_require('views/pdf.js');
 sc_require('mixins/image.js');
 sc_require('controllers/current_file_node.js');
 

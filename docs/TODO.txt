@@ -26,12 +26,13 @@
 - rewrite root README in MarkDown
 - update loading pages (Multivio.loadingPage and loading.rhtml)
 - factorize toolbar view from image/pdf/... views
-- consistently name views (adjust "View"/"Page"/"Pane" suffix and file names)
 - CSS: remove all classes starting with '.sc-*' (use '.mvo-' instead, together with the 'classNames' property in the views)
 - rename 'toolbar' -> 'navigation toolbar' and 'navigation bar' -> 'side toolbar'
 
 
 ## DONE
+
+### Major
 
 - page number
 - download
@@ -41,3 +42,7 @@
 - go to page
 - 100%
 - grid thumbnails (1/2 day)
+
+### Minor
+
+- consistently name views (adjust "View"/"Page"/"Pane" suffix and file names)

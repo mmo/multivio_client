@@ -6,7 +6,7 @@
 ==============================================================================
 */
 
-Multivio.unsupportedFileView =  SC.View.design({
+Multivio.UnsupportedFileView =  SC.View.extend({
   childViews: ['titleView', 'previousButton', 'nextButton'],
 
   titleView: SC.View.design({

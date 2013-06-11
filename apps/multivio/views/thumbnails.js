@@ -10,7 +10,7 @@ sc_require('mixins/interface.js');
 sc_require('views/thumbnail.js');
 sc_require('controllers/thumbnails.js');
 
-Multivio.thumbnailsView = SC.PalettePane.design({
+Multivio.ThumbnailsView = SC.PalettePane.extend({
   layout: {left: 45, top: 10, width: 150, bottom: 100},
   classNames: 'mvo-palette-pane'.w(),
   isAnchored: YES,

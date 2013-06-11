@@ -15,7 +15,7 @@
 sc_require('views/navigation_item.js');
 sc_require('controllers/navigation.js');
 
-Multivio.NavigationBar = SC.SourceListView.design({
+Multivio.NavigationBarView = SC.SourceListView.design({
   classNames: 'mvo-navigation-bar'.w(),
   allowDeselectAll: YES,
   useToggleSelection: NO,
@@ -27,7 +27,7 @@ Multivio.NavigationBar = SC.SourceListView.design({
   contentIconKey: 'icon',
   selectionBinding: 'Multivio.navigationController.selection',
   contentBinding: 'Multivio.navigationController.content',
-  exampleView: Multivio.NavigationItem,
+  exampleView: Multivio.NavigationItemView,
   rowHeight: 32,
   rowSpacing: 8,
 

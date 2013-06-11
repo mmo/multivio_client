@@ -10,7 +10,7 @@ sc_require('mixins/fadeinout.js');
 sc_require('controllers/image_file.js');
 sc_require('views/center_image.js');
 
-Multivio.mainImageView =  SC.View.design({
+Multivio.ImageView =  SC.View.extend({
   classNames: 'mvo-main-image-view'.w(),
   childViews: ['waitingView', 'imageScrollView', 'bottomToolbar'],
   classNames: 'mvo-main-image-view'.w(),
@@ -42,7 +42,7 @@ Multivio.mainImageView =  SC.View.design({
   imageScrollView: SC.ScrollView.design({
     classNames: "mvo-image-scroll-view".w(),
     layout: { top: 0, left: 0, bottom: 0, right: 0},
-    contentView: Multivio.CenterImage.design({
+    contentView: Multivio.CenterImageView.design({
       layout: { centerX: 0, centerY: 0 },
       init: function () {
         sc_super();

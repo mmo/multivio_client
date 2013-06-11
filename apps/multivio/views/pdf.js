@@ -10,7 +10,7 @@ sc_require('mixins/fadeinout.js');
 sc_require('views/center_image.js');
 sc_require('controllers/pdf_file.js');
 
-Multivio.mainPdfView =  SC.View.design({
+Multivio.PdfView =  SC.View.extend({
   classNames: 'mvo-main-pdf-view'.w(),
   childViews: ['waitingView', 'pdfScrollView', 'bottomToolbar'], 
   acceptsFirstResponder: YES,
@@ -49,7 +49,7 @@ Multivio.mainPdfView =  SC.View.design({
   pdfScrollView: SC.ScrollView.design({
     classNames: "mvo-pdf-scroll-view".w(),
     layout: { top: 0, left: 0, bottom: 0, right: 0},
-    contentView: Multivio.CenterImage.design({
+    contentView: Multivio.CenterImageView.design({
       layout: { centerX: 0, centerY: 0 },
       init: function () {
         sc_super();

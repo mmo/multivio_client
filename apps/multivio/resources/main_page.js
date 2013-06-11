@@ -14,9 +14,9 @@
   @since 0.1.0
 */
 
-sc_require('views/unsupported_view.js');
+sc_require('views/unsupported_file.js');
 sc_require('views/thumbnails.js');
-sc_require('views/pdf_view.js');
+sc_require('views/pdf.js');
 sc_require('views/image.js');
 sc_require('views/navigation_bar.js');
 sc_require('views/title.js');
@@ -59,7 +59,7 @@ Multivio.mainPage = SC.Page.design({
       }),
     }),
 
-    leftView: Multivio.NavigationBar,
+    leftView: Multivio.NavigationBarView,
 
     mouseDown: function (ev) {
       SC.Logger.debug('MainPane: mouseDown');
@@ -67,14 +67,13 @@ Multivio.mainPage = SC.Page.design({
     }
   }),
 
-  // All these other views are employed on request, according to the
-  // app's workflow; they are each decalred in their own source file (inside
-  // the "views" folder)
-  mainPdfView: Multivio.mainPdfView,
-  mainImageView: Multivio.mainImageView,
-  unsupportedFileView: Multivio.unsupportedFileView,
-  thumbnailsView: Multivio.thumbnailsView,
-  navigationBar: Multivio.NavigationBar,
+  // All these other views are employed on request, according to the app's workflow;
+  // they are each declared in their own source file (in the "views" folder)
+  mainPdfView: Multivio.PdfView,
+  mainImageView: Multivio.ImageView,
+  unsupportedFileView: Multivio.UnsupportedFileView,
+  thumbnailsView: Multivio.ThumbnailsView,
+  navigationBar: Multivio.NavigationBarView,
   helpPane: Multivio.HelpPane,
   titleView: Multivio.TitleView,
   treeView: Multivio.TreeView,

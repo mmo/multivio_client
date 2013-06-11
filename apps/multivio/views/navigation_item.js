@@ -12,7 +12,7 @@
 
   @extends SC.View
 */
-Multivio.NavigationItem = SC.ListItemView.extend({
+Multivio.NavigationItemView = SC.ListItemView.extend({
 
   displayProperties: ['icon', 'panel'],
   classNames: 'mvo-navigation-item mvo-button-view'.w(),
