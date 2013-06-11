@@ -39,7 +39,7 @@ Multivio.thumbnailsView = SC.PalettePane.design({
         rowSpacing: 10,
         columnWidth: 130,
 
-        _selectionDidChanged: function () {
+        _selectionDidChange: function () {
           var selection = this.getPath('selection').firstObject();
           if (selection && selection.get('pageNumber') > 0) {
             SC.Logger.debug('selection: changed ' + selection.get('pageNumber')); 

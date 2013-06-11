@@ -68,7 +68,9 @@ Multivio.mainPdfView =  SC.View.design({
     childViews: [
       'overviewButton',
       'rotateLeftButton', 'rotateRightButton',
-      'previousPageButton', 'previousButton', 'pageEntry', 'nextButton', 'nextPageButton',
+      'previousDocButton', 'previousPageButton',
+      'pageEntry',
+      'nextPageButton', 'nextDocButton',
       'previousZoomButton', 'nextZoomButton',
       'fitWidthButton', 'fitAllButton', 'hundredPercentButton'],
     classNames: "mvo-front-view-transparent".w(),
@@ -112,7 +114,7 @@ Multivio.mainPdfView =  SC.View.design({
       title: '+'
     }),
 
-    previousButton: SC.ImageButtonView.design({
+    previousDocButton: SC.ImageButtonView.design({
       layout: {centerY: 0, centerX: -80, width: 32, height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-previous-doc',
@@ -167,7 +169,7 @@ Multivio.mainPdfView =  SC.View.design({
       isEnabledBinding: 'Multivio.pdfFileController.hasNextIndex',
       title: '>'
     }),
-    nextButton: SC.ImageButtonView.design({
+    nextDocButton: SC.ImageButtonView.design({
       layout: {centerY: 0,  centerX: 82, width: 32,  height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-next-doc',

@@ -77,7 +77,7 @@ Multivio.CenterImage = SC.View.extend({
       sc_super();
       this.reload(); 
     },
-    _selectionDidChanged: function () {
+    _selectionDidChange: function () {
       var sel = this.get('selection');
       if (!SC.none(sel) && sel.firstObject()) {
         sel = sel.firstObject();
