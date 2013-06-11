@@ -6,8 +6,8 @@
 ==============================================================================
 */
 
-sc_require('controllers/pdf.js');
-sc_require('controllers/image.js');
+sc_require('controllers/pdf_file.js');
+sc_require('controllers/image_file.js');
 
 /**
   @namespace

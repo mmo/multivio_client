@@ -20,19 +20,19 @@ Multivio.currentFileNodeController = SC.ObjectController.create({
 /*********************************************************************************/
   hasNextIndex: function () {
     var nPages = this.get('nPages');
-    var currentIndex = this.get('currentIndex');
+    var ci = this.get('currentIndex');
 
-    if (nPages && currentIndex >= 0) {
-      return currentIndex < nPages ? YES : NO;
+    if (nPages && ci >= 0) {
+      return ci < nPages ? YES : NO;
     }
     return NO;
   }.property('nPages', 'currentIndex').cacheable(),
 
   hasPreviousIndex: function () {
     var nPages = this.get('nPages'),
-      currentIndex = this.get('currentIndex');
-    if (nPages && currentIndex > 0) {
-      return currentIndex > 1 ? YES : NO;
+      ci = this.get('currentIndex');
+    if (nPages && ci > 0) {
+      return ci > 1 ? YES : NO;
     }
     return NO;
   }.property('nPages', 'currentIndex').cacheable(),

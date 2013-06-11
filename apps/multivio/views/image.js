@@ -7,7 +7,7 @@
 */
 
 sc_require('mixins/fadeinout.js');
-sc_require('controllers/image.js');
+sc_require('controllers/image_file.js');
 sc_require('views/center_image.js');
 
 Multivio.mainImageView =  SC.View.design({

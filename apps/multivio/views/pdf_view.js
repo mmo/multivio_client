@@ -8,7 +8,7 @@
 
 sc_require('mixins/fadeinout.js');
 sc_require('views/center_image.js');
-sc_require('controllers/pdf.js');
+sc_require('controllers/pdf_file.js');
 
 Multivio.mainPdfView =  SC.View.design({
   classNames: 'mvo-main-pdf-view'.w(),
