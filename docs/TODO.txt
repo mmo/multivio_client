@@ -27,8 +27,16 @@
 - update loading pages (Multivio.loadingPage and loading.rhtml)
 - factorize toolbar view from image/pdf/... views
 - CSS: remove all classes starting with '.sc-*' (use '.mvo-' instead, together with the 'classNames' property in the views)
-- rename 'toolbar' -> 'navigation toolbar' and 'navigation bar' -> 'side toolbar'
+- check and adapt help text
+- the tools in the side toolbar are all mutually exclusive (should be the case only for some of them)
+- the 1:1 button does not have the same behaviour as the other two predefined-zoom buttons
 
+
+## Detected bugs
+
+- selected item in tree view is not always the one that is clicked (seems to happen when there are several tree entries for the same page) - check record 13146
+- the active/inactive state is not always correct for the navigation buttons (<<, <, >, >>)
+- 
 
 ## DONE
 
@@ -46,3 +54,4 @@
 ### Minor
 
 - consistently name views (adjust "View"/"Page"/"Pane" suffix and file names)
+- rename 'toolbar' -> 'navigation toolbar' and 'navigation bar' -> 'side toolbar'

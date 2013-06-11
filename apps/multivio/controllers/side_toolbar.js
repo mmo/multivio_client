@@ -16,7 +16,8 @@ sc_require('views/help.js');
 sc_require('views/thumbnails.js');
 sc_require('views/tree.js');
 sc_require('views/search.js');
-Multivio.navigationController = SC.ArrayController.create({
+
+Multivio.sideToolbarController = SC.ArrayController.create({
 
   currentOpenPanel: null,
 
@@ -57,7 +58,7 @@ Multivio.navigationController = SC.ArrayController.create({
   _selectionDidChange: function () {
     var panelName;
     var sel = this.get('selection');
-    SC.Logger.debug('navigationBar: selection changed! ' + sel.length());
+    SC.Logger.debug('sideToolbarBar: selection changed! ' + sel.length());
     if (!SC.none(sel) && sel.length() > 0) {
       panelName = sel.firstObject().get('panel');
       var action = sel.firstObject().get('action');
@@ -112,7 +113,7 @@ Multivio.navigationController = SC.ArrayController.create({
       buttons: [
         { 
           title: "Continue",
-          action: Multivio.navigationController.performDownload
+          action: Multivio.sideToolbarController.performDownload
         },
         { 
           title: "Cancel"

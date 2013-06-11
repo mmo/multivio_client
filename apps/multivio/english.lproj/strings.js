@@ -138,8 +138,8 @@ SC.stringsFor('English', {
   '_helpMetadata': "Displays document metadata: author, title, etc.",
   '_helpDownload': "Downloads the current file.",
   '_helpDisplayBar': "Makes the navigation toolbar remain visible.",
-  '_helpNavigationBar': "Navigation toolbar",
-  '_helpNavigationBarDesc': "This toolbar is shown when the mouse pointer\
+  '_helpNavigationToolbar': "Navigation toolbar",
+  '_helpNavigationToolbarDesc': "This toolbar is shown when the mouse pointer\
       goes over the lower part of the displayed document.",
   '_helpLoupe': "Shows or hides the overview miniature (bottom left) that\
       indicates which portion of the content is currently visible. It also\

@@ -132,7 +132,7 @@ Multivio.CenterImageView = SC.View.extend({
       sc_super();
       //forward event to parents
       return NO;
-      //Multivio.navigationController.closeAll();
+      //Multivio.sideToolbarController.closeAll();
     },
     exampleView: SC.View.extend(SC.Control, {
       classNames: "mvo-search-results".w(),

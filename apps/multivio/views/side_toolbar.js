@@ -12,22 +12,22 @@
 
   @extends SC.View
 */
-sc_require('views/navigation_item.js');
-sc_require('controllers/navigation.js');
+sc_require('views/side_toolbar_item.js');
+sc_require('controllers/side_toolbar.js');
 
-Multivio.NavigationBarView = SC.SourceListView.design({
-  classNames: 'mvo-navigation-bar'.w(),
+Multivio.SideToolbarView = SC.SourceListView.design({
+  classNames: 'mvo-side_toolbar'.w(),
   allowDeselectAll: YES,
   useToggleSelection: NO,
   acceptsFirstResponder: NO,
   selectOnMouseDown: YES,
   layout: { top: 12, left: 4, bottom: 40, width: 32},
-  layerId: 'mvo-navigation-bar',
+  layerId: 'mvo-side-toolbar',
   contentValueKey: 'panel',
   contentIconKey: 'icon',
-  selectionBinding: 'Multivio.navigationController.selection',
-  contentBinding: 'Multivio.navigationController.content',
-  exampleView: Multivio.NavigationItemView,
+  selectionBinding: 'Multivio.sideToolbarController.selection',
+  contentBinding: 'Multivio.sideToolbarController.content',
+  exampleView: Multivio.SideToolbarItemView,
   rowHeight: 32,
   rowSpacing: 8,
 

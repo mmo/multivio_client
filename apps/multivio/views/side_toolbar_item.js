@@ -12,10 +12,10 @@
 
   @extends SC.View
 */
-Multivio.NavigationItemView = SC.ListItemView.extend({
+Multivio.SideToolbarItemView = SC.ListItemView.extend({
 
   displayProperties: ['icon', 'panel'],
-  classNames: 'mvo-navigation-item mvo-button-view'.w(),
+  classNames: 'mvo-navigation-toolbar-item mvo-button-view'.w(),
   layout: {height: 32, centerX: 0, centerY: 0, width: 32},
   mouseEntered: function () {
     var jquery = this.$();

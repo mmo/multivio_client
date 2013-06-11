@@ -18,7 +18,7 @@ sc_require('views/unsupported_file.js');
 sc_require('views/thumbnails.js');
 sc_require('views/pdf.js');
 sc_require('views/image.js');
-sc_require('views/navigation_bar.js');
+sc_require('views/side_toolbar.js');
 sc_require('views/title.js');
 sc_require('views/help.js');
 sc_require('views/tree.js');
@@ -59,11 +59,11 @@ Multivio.mainPage = SC.Page.design({
       }),
     }),
 
-    leftView: Multivio.NavigationBarView,
+    leftView: Multivio.SideToolbarView,
 
     mouseDown: function (ev) {
       SC.Logger.debug('MainPane: mouseDown');
-      Multivio.navigationController.closeAll();
+      Multivio.sideToolbarController.closeAll();
     }
   }),
 
@@ -73,7 +73,7 @@ Multivio.mainPage = SC.Page.design({
   mainImageView: Multivio.ImageView,
   unsupportedFileView: Multivio.UnsupportedFileView,
   thumbnailsView: Multivio.ThumbnailsView,
-  navigationBar: Multivio.NavigationBarView,
+  sideToolbar: Multivio.SideToolbarView,
   helpPane: Multivio.HelpPane,
   titleView: Multivio.TitleView,
   treeView: Multivio.TreeView,

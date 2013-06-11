@@ -1,12 +1,12 @@
 // ==========================================================================
-// Project:   Multivio.navigationController Unit Test
+// Project:   Multivio.sideToolbarController Unit Test
 // Copyright: ©2011 My Company, Inc.
 // ==========================================================================
 /*globals Multivio module test ok equals same stop start */
 
-module("Multivio.navigationController");
+module("Multivio.sideToolbarController");
 
-// TODO: Replace with real unit test for Multivio.navigationController
+// TODO: Replace with real unit test for Multivio.sideToolbarController
 test("test description", function() {
   var expected = "test";
   var result   = "test";
