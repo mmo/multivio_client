@@ -38,7 +38,7 @@ Multivio.currentFileNodeController = SC.ObjectController.create({
   }.property('nPages', 'currentIndex').cacheable(),
 
   treeItemChildrenObserves: function () {
-    if (this.get('isContent')) {
+    if (this.get('isContentNode')) {
       Multivio.treeController.update();
     }
     this.set('treeItemIsExpanded', YES);

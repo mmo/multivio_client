@@ -59,7 +59,7 @@ Multivio.FetchingContentState = SC.State.extend(/** @scope Multivio.FetchingCont
       var fileNode = this.get('fileNodeBeingFetched');
       if (fileNode && fileNode.get('mime')) {
         // if it's a content node the work is done - the content can be displayed
-        if (fileNode.get('isContent')) {
+        if (fileNode.get('isContentNode')) {
           // STATE TRANSITION
           this.gotoState('displayingContent', fileNode);
         } else {
@@ -106,7 +106,7 @@ Multivio.FetchingContentState = SC.State.extend(/** @scope Multivio.FetchingCont
       var fileNode = this.get('fileNodeBeingFetched');
       if (fileNode && fileNode.get('mime')) {
         // if it's a content node the work is done - the content can be displayed
-        if (fileNode.get('isContent')) {
+        if (fileNode.get('isContentNode')) {
           // STATE TRANSITION
           this.gotoState('displayingContent', fileNode);
         } else {

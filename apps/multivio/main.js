@@ -35,10 +35,23 @@ Multivio.main = function main() {
   // This will make your app come alive!
   //Multivio.getPath('mainPage.mainPane').append();
 
-  // TODO: Set the content property on your primary controller
+  // Set the content property on your primary controller
   // ex: Multivio.contactsController.set('content',Multivio.contacts);
   SC.routes.add('*', Multivio, 'reload');
   Multivio.mainStatechart.initStatechart();
+
+  // With the following statetement... "[...] what you are doing is telling the
+  // root responder to let your application's statechart be the catch-all (the
+  // default) for any action sent to it if no other target responder could be
+  // found to handle the incoming action. [...] By having your app's statechart
+  // by the one and only default responder, it helps centralize your
+  // aplication's state logic into one cohesive set of states. It also makes it
+  // easier maintaining your code since you set the default responder in only
+  // one place instead of multiple places such as being the default responder
+  // for every pane in your application." From the blog post "SproutCore:
+  // Making Use of Delegation | Frozen Canuck", 03.11.2011:
+  // http://frozencanuck.wordpress.com/2011/02/03/sproutcore-making-use-of-delegation/
+  SC.RootResponder.responder.set('defaultResponder', Multivio.mainStatechart);
 
 };
 

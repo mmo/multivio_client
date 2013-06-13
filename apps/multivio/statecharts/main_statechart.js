@@ -209,7 +209,7 @@ Multivio.mainStatechart = SC.Object.create(SC.StatechartManager, {
           Multivio.setPath('rootNodeController.content', currentFetchingRootNode);
           currentFetchingRootNode.set('treeItemIsExpanded', YES);
           Multivio.setPath('treeController.content.treeItemChildren', [currentFetchingRootNode]);
-          if (currentFetchingRootNode.get('isContent')) {
+          if (currentFetchingRootNode.get('isContentNode')) {
             // STATE TRANSITION
             this.gotoState('displayingContent', currentFetchingRootNode);
           } else {

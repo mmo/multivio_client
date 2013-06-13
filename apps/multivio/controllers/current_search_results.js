@@ -10,8 +10,6 @@ Multivio.LOADING_CANCEL = "cancel";
 
 /** @namespace
 
-  TODO
-
   @extends SC.Object
 */
 Multivio.currentSearchResultsController = SC.ArrayController.create(
@@ -22,8 +20,6 @@ Multivio.currentSearchResultsController = SC.ArrayController.create(
 });
 
 /** @namespace
-
-  TODO
 
   @extends SC.Object
 */

@@ -97,6 +97,8 @@ Multivio = SC.Application.create({
       }
       this.endPropertyChanges();
     }
-  })
+  }),
+  
+  navigationTarget: null
 
 });

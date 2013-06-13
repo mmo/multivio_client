@@ -8,11 +8,11 @@
 
 /** @class
 
-  This is the main visual content displayed by the application. It currently supports only
-  image-based content, either image native formats or those obtained from PDF page
-  rendering
+  This is the main visual content displayed by the application. It currently
+  supports only image-based content, either image native formats or those
+  obtained from PDF page rendering
 
-@extends SC.View
+  @extends SC.View
 */
 Multivio.CenterImageView = SC.View.extend({
   layout: {top: 0, right: 0, bottom: 0, left: 0},

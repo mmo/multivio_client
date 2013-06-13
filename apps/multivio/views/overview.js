@@ -16,11 +16,11 @@ Multivio.Overview = SC.PalettePane.design(SC.Animatable, {
   transitions: {
     // and add transitions
     // CSS-transition-only timing function (JavaScript gets linear)
-    opacity: {duration: 0.5, timing: SC.Animatable.TRANSITION_CSS_EASE_IN_OUT }
+    opacity: {duration: 0.3, timing: SC.Animatable.TRANSITION_CSS_EASE_IN_OUT }
     //display: .75 // a bit longer than opacity 
   },
-  layout: {bottom: 115, right: 34, width: 155, height: 155},
-  isAnchored: NO,
+  layout: {bottom: 124, right: 30, width: 155, height: 155},
+  isAnchored: YES,
   //isModal: NO,
   contentView: SC.View.extend({
     layout: {top: 5, right: 5, bottom: 5, left: 5},
@@ -92,7 +92,7 @@ Multivio.Overview = SC.PalettePane.design(SC.Animatable, {
   close: function () {
     // first, fade this view out
     this.adjust("opacity", 0);
-    this.invokeLater(this.remove, 500);
+    this.invokeLater(this.remove, 300);
   }
 
 });

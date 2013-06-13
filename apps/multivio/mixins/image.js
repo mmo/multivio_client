@@ -6,9 +6,10 @@
 ==============================================================================
 */
 
-Multivio.ZOOM_MODE = 'zoom';
-Multivio.FIT_WIDTH_MODE = 'fit-width';
-Multivio.FIT_ALL_MODE = 'fit-all';
+Multivio.ZOOM_MODE_IN_SCALE = 'in-scale';
+Multivio.ZOOM_MODE_FIT_WIDTH = 'fit-width';
+Multivio.ZOOM_MODE_FIT_ALL = 'fit-all';
+Multivio.ZOOM_MODE_100_PERCENT = '100-percent';
 
 Multivio.DisplayImage = {
   _centerViewWidth: 0,
@@ -16,14 +17,21 @@ Multivio.DisplayImage = {
   _centerImageStatus: null,
   _appOptions: null,
   rotationAngle: 0,
-  mode: Multivio.FIT_ALL_MODE, //fitWidth, zoom, fit, native
+  zoomMode: Multivio.ZOOM_MODE_FIT_ALL, //fitWidth, zoom, fit, native
   _zoomScale: [],
   _currentZoomIndex: -1,
   centerImage: null,
 
+  /**
+    This property stores the URL corresponding to the image that is displayed.
+    It is updated whenever the context changes:
+    - zoom factor
+    - window size
+    - rotation angle
+  */
   currentUrl: function () {
 
-    if (this.get('isContent')) {
+    if (this.get('isContentNode')) {
       
       //pdf check
       if (this.get('isPDF') || this.get('isImage')) {
@@ -33,39 +41,48 @@ Multivio.DisplayImage = {
         var angle = -this.get('rotationAngle');
         
         //different zoom mode
-        switch (this.get('mode')) {
+        switch (this.get('zoomMode')) {
 
-        case Multivio.FIT_WIDTH_MODE:
-          newWidth = parseInt(this.get('_centerViewWidth'), 10);
-          if (angle % 180) {
-            newUrl = "%@max_height=%@&angle=%@&%@".fmt(this.get('_renderPrefix'), newWidth, angle, this.get('_currentUrl'));
-          } else {
-            newUrl = "%@max_width=%@&angle=%@&%@".fmt(this.get('_renderPrefix'), newWidth, angle, this.get('_currentUrl'));
-          }
-          break;
-
-        case Multivio.FIT_ALL_MODE:
-          if (angle % 180) {
-            newHeight = parseInt(this.get('_centerViewWidth'), 10);
-            newWidth = parseInt(this.get('_centerViewHeight'), 10);
-          } else {
+          case Multivio.ZOOM_MODE_FIT_WIDTH:
             newWidth = parseInt(this.get('_centerViewWidth'), 10);
-            newHeight = parseInt(this.get('_centerViewHeight'), 10);
-          }
-          newUrl = "%@max_width=%@&max_height=%@&angle=%@&%@".fmt(this.get('_renderPrefix'), newWidth, newHeight, angle, this.get('_currentUrl'));
-          break;
+            if (angle % 180) {
+              newUrl =
+                "%@max_height=%@&angle=%@&%@".fmt(this.get('_renderPrefix'),
+                   newWidth, angle, this.get('_currentUrl'));
+            } else {
+              newUrl =
+                "%@max_width=%@&angle=%@&%@".fmt(this.get('_renderPrefix'),
+                  newWidth, angle, this.get('_currentUrl'));
+            }
+            break;
 
-        default:
-          newWidth = parseInt(this.get('_defaultWidth') * scaleFactor, 10);
-          newHeight = parseInt(this.get('_defaultHeight') * scaleFactor, 10);
-          newUrl = "%@max_width=%@&max_height=%@&angle=%@&%@".fmt(this.get('_renderPrefix'), newWidth, newHeight, angle, this.get('_currentUrl'));
+          case Multivio.ZOOM_MODE_FIT_ALL:
+            if (angle % 180) {
+              newHeight = parseInt(this.get('_centerViewWidth'), 10);
+              newWidth = parseInt(this.get('_centerViewHeight'), 10);
+            } else {
+              newWidth = parseInt(this.get('_centerViewWidth'), 10);
+              newHeight = parseInt(this.get('_centerViewHeight'), 10);
+            }
+            newUrl = "%@max_width=%@&max_height=%@&angle=%@&%@"
+              .fmt(this.get('_renderPrefix'), newWidth, newHeight, angle,
+                this.get('_currentUrl'));
+            break;
+
+          default:
+            newWidth = parseInt(this.get('_defaultWidth') * scaleFactor, 10);
+            newHeight = parseInt(this.get('_defaultHeight') * scaleFactor, 10);
+            newUrl = "%@max_width=%@&max_height=%@&angle=%@&%@"
+              .fmt(this.get('_renderPrefix'), newWidth, newHeight, angle,
+                this.get('_currentUrl'));
         }
         return newUrl;
       }
     } else {
       return undefined;
     }
-  }.property('rotationAngle', '_currentZoomIndex', '_currentUrl', '_centerViewWidth', '_centerViewHeight', 'mode'),
+  }.property('rotationAngle', '_currentZoomIndex', '_currentUrl',
+     '_centerViewWidth', '_centerViewHeight', 'zoomMode'),
 
   _renderPrefix: function () {
     var server = Multivio.configurator.get('serverName');
@@ -118,46 +135,63 @@ Multivio.DisplayImage = {
 
   fitWidth: function (key, value) {
     SC.Logger.debug('fitWidth: ' + value);
-    if (SC.none(value)) {
-      if (this.get('mode') === Multivio.FIT_WIDTH_MODE) {
+    if (SC.none(value)) { // function called for reading (getting)
+      if (this.get('zoomMode') === Multivio.ZOOM_MODE_FIT_WIDTH) {
         return YES;
       } else {
         return NO;
       }
-    } else {
+    } else { // function called for writing (setting)
       if (value) {
-        this.set('mode', Multivio.FIT_WIDTH_MODE);
-      } else {
-        this.set('mode', Multivio.ZOOM_MODE);
+        this.set('zoomMode', Multivio.ZOOM_MODE_FIT_WIDTH);
+      // } else {
+      //   this.set('zoomMode', Multivio.ZOOM_MODE_IN_SCALE);
       }
     }
-  }.property('mode').cacheable(),
+  }.property('zoomMode').cacheable(),
 
   fitAll: function (key, value) {
     SC.Logger.debug('fitAll: ' + value);
-    if (SC.none(value)) {
-      if (this.get('mode') === Multivio.FIT_ALL_MODE) {
+    if (SC.none(value)) { // function called for reading (getting)
+      if (this.get('zoomMode') === Multivio.ZOOM_MODE_FIT_ALL) {
         return YES;
       } else {
         return NO;
       }
-    } else {
+    } else { // function called for writing (setting)
       if (value) {
-        this.set('mode', Multivio.FIT_ALL_MODE);
-      } else {
-        this.set('mode', Multivio.ZOOM_MODE);
+        this.set('zoomMode', Multivio.ZOOM_MODE_FIT_ALL);
+      // } else {
+      //   this.set('zoomMode', Multivio.ZOOM_MODE_IN_SCALE);
       }
     }
-  }.property('mode').cacheable(),
+  }.property('zoomMode').cacheable(),
+
+  hundredPercentZoom: function (key, value) {
+    SC.Logger.debug('hundredPercentZoom: ' + value);
+    if (SC.none(value)) { // function called for reading (getting)
+      if (this.get('zoomMode') === Multivio.ZOOM_MODE_100_PERCENT) {
+        return YES;
+      } else {
+        return NO;
+      }
+    } else { // function called for writing (setting)
+      if (value) {
+        this.set('zoomMode', Multivio.ZOOM_MODE_100_PERCENT);
+        this.set('_currentZoomIndex', this._nativeZoomIndex);
+      }
+    }
+  }.property('zoomMode').cacheable(),
   
 
   nextZoom: function () {
-    if (this.get('mode') !== Multivio.ZOOM_MODE) {
+    if (this.get('zoomMode') !== Multivio.ZOOM_MODE_IN_SCALE) {
       var correspondingZoom = this._getNearestZoomIndex(NO);
       this.set('_currentZoomIndex', correspondingZoom);
-      this.set('mode', Multivio.ZOOM_MODE);
+      this.set('zoomMode', Multivio.ZOOM_MODE_IN_SCALE);
       return;
-    } else {
+    }
+    else {
       if (this.get('hasNextZoom')) {
         this.set('_currentZoomIndex', this.get('_currentZoomIndex') + 1);
       }
@@ -165,12 +199,13 @@ Multivio.DisplayImage = {
   },
 
   previousZoom: function () {
-    if (this.get('mode') !== Multivio.ZOOM_MODE) {
+    if (this.get('zoomMode') !== Multivio.ZOOM_MODE_IN_SCALE) {
       var correspondingZoom = this._getNearestZoomIndex(YES);
       this.set('_currentZoomIndex', correspondingZoom);
-      this.set('mode', Multivio.ZOOM_MODE);
+      this.set('zoomMode', Multivio.ZOOM_MODE_IN_SCALE);
       return;
-    } else {
+    }
+    else {
       if (this.get('hasPreviousZoom')) {
         this.set('_currentZoomIndex', this.get('_currentZoomIndex') - 1);
       }
@@ -225,25 +260,27 @@ Multivio.DisplayImage = {
 
   hasNextZoom: function () {
     var currentZoomIndex = this.get('_currentZoomIndex');
-    if (this.get('mode') !== Multivio.ZOOM_MODE) {
+    if (this.get('zoomMode') !== Multivio.ZOOM_MODE_IN_SCALE &&
+        this.get('zoomMode') !== Multivio.ZOOM_MODE_100_PERCENT) {
       currentZoomIndex = this._getNearestZoomIndex(YES);
     }
     if (currentZoomIndex < (this.get('_zoomScale').length - 2)) {
       return YES;
     }
     return NO;
-  }.property('_currentZoomIndex', '_centerImageStatus').cacheable(),
+  }.property('_currentZoomIndex', '_centerImageStatus', 'zoomMode').cacheable(),
 
   hasPreviousZoom: function () {
     var currentZoomIndex = this.get('_currentZoomIndex');
-    if (this.get('mode') !== Multivio.ZOOM_MODE) {
+    if (this.get('zoomMode') !== Multivio.ZOOM_MODE_IN_SCALE &&
+        this.get('zoomMode') !== Multivio.ZOOM_MODE_100_PERCENT) {
       currentZoomIndex = this._getNearestZoomIndex(NO);
     }
-    if (this.get('_currentZoomIndex') > 0) {
+    if (currentZoomIndex > 0) {
       return YES;
     }
     return NO;
-  }.property('_currentZoomIndex', '_centerImageStatus').cacheable(),
+  }.property('_currentZoomIndex', '_centerImageStatus', 'zoomMode').cacheable(),
 
   //********************// 
   //        ROTATION   //

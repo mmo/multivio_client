@@ -4,41 +4,53 @@
 ## Main Tasks
 
 - text selection (1day, 1-2day)
-- calendar(3day)
-- pre-indexing(2 day)
 
 
 ## Minor Tasks
 
 - overview (1day)
-- finalize shortcut (1day)
+- finalize keyboard shortcuts (1day)
 - themes + appearance (1day)
-- API (1 day)
+- check API (1 day)
 - tests and IE (5 days)
 
 
 ## Related to code review and documentation
 
-- update copyright header message in all files (2009-2013)
 - review TODOs
-- check JSDoc compliance
 - add unit tests
 - rewrite root README in MarkDown
 - update loading pages (Multivio.loadingPage and loading.rhtml)
-- factorize toolbar view from image/pdf/... views
 - CSS: remove all classes starting with '.sc-*' (use '.mvo-' instead, together with the 'classNames' property in the views)
-- check and adapt help text
+- check and adapt help text (start from current production text)
 - the tools in the side toolbar are all mutually exclusive (should be the case only for some of them)
-- the 1:1 button does not have the same behaviour as the other two predefined-zoom buttons
+- replace use of SC.Animatable mixin (deprecated) with SC.View.animate()
+- anchor infoPane to top of window, instead of top of image
+- reactivate fade transitions
+- check if zoom fully functional (including enabled button status)
+- factor out waitingView?
+- show navigation toolbar after image loading
+- reactivate navigation toolbar on mouse hover
+- try to include several images of the same record in the same thumbnail view
+
+
+## Code-tidy
+
+- update copyright header message in all files (2009-2013)
+- check JSDoc compliance
+- adjust all occurrences of "} else"
+- check SproutCore JS guidelines http://guides.sproutcore.com/style_guide.html
 
 
 ## Detected bugs
 
 - selected item in tree view is not always the one that is clicked (seems to happen when there are several tree entries for the same page) - check record 13146
 - the active/inactive state is not always correct for the navigation buttons (<<, <, >, >>)
-- 
 
-## DONE
+
+----------------------------------------------
+
+# DONE
 
 ### Major
 
@@ -55,3 +67,15 @@
 
 - consistently name views (adjust "View"/"Page"/"Pane" suffix and file names)
 - rename 'toolbar' -> 'navigation toolbar' and 'navigation bar' -> 'side toolbar'
+- factorize toolbar view from image/pdf/... views
+- the 1:1 button does not have the same behaviour as the other two predefined-zoom buttons
+
+
+----------------------------------------------
+
+## For later major release
+
+## Main Tasks
+
+- calendar (3 day)
+- pre-indexing (2 day)

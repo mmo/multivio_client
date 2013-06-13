@@ -25,7 +25,7 @@ Multivio.DisplayingContentState = SC.State.extend({
     @default SC.State dispatchingContent
   */
   initialSubstate: 'dispatchingContent',
-
+  
   /**
     STATE EVENT
     
@@ -152,8 +152,12 @@ Multivio.DisplayingContentState = SC.State.extend({
 
     /** */
     enterState: function (fileNode) {
-      var viewToChange = Multivio.getPath('mainPage.mainPane.centerView.mainContentView');
-      
+
+      Multivio.set('navigationTarget', Multivio.pdfFileController);
+
+      var viewToChange =
+        Multivio.getPath('mainPage.mainPane.centerView.mainContentView');
+
       //a pdf was already displayed
       if (viewToChange.get('nowShowing') !== 'mainPdfView') {
         viewToChange.set('nowShowing', 'mainPdfView');
@@ -169,8 +173,8 @@ Multivio.DisplayingContentState = SC.State.extend({
         tv.bind('target', 'Multivio.pdfThumbnailsController');
         // TODO: unbind these afterwards
         
-        // display toolbar
-        Multivio.getPath('mainPage.mainPdfView.bottomToolbar').displayBar();
+        // display toolbar (it will fade out by itself)
+//        Multivio.getPath('mainPage.bottomToolbarView').displayBar();
       }
       Multivio.pdfFileController.set('content', fileNode);
       Multivio.pdfFileController.set('currentPage', 1);
@@ -237,6 +241,9 @@ Multivio.DisplayingContentState = SC.State.extend({
 
     /** */
     enterState: function (fileNode) {
+
+      Multivio.set('navigationTarget', Multivio.imageFileController);
+
       var viewToChange = Multivio.getPath('mainPage.mainPane.centerView.mainContentView');
       if (viewToChange.get('nowShowing') !== 'mainImageView') {
         viewToChange.set('nowShowing', 'mainImageView');
@@ -251,7 +258,7 @@ Multivio.DisplayingContentState = SC.State.extend({
         tv.bind('selection', 'Multivio.imageThumbnailsController.selection');
         tv.bind('target', 'Multivio.imageThumbnailsController');
 
-        Multivio.getPath('mainPage.mainImageView.bottomToolbar').displayBar();
+//        Multivio.getPath('mainPage.mainImageView.bottomToolbar').displayBar();
         Multivio.getPath('mainPage.mainImageView.imageScrollView.contentView.infoPanel').displayBar();
       }
       Multivio.imageFileController.set('content', fileNode);

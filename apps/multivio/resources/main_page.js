@@ -78,5 +78,7 @@ Multivio.mainPage = SC.Page.design({
   titleView: Multivio.TitleView,
   treeView: Multivio.TreeView,
   searchView: Multivio.SearchView,
-  overview: Multivio.Overview
+  overview: Multivio.Overview,
+  bottomToolbarView: Multivio.NavigationToolbarView
+
 });

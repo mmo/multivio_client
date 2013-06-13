@@ -167,7 +167,7 @@ Multivio.SearchOperationalState = SC.State.extend({
     updateSearch: function (currentUserQuery) {
       var currentFetchingFileNode = Multivio.getPath('currentFileNodeController.content');
       // search only if the current file is searchable
-      if (currentFetchingFileNode.get('isContent')) {
+      if (currentFetchingFileNode.get('isContentNode')) {
         //reset seachResult and counters
         this.set('currentFetchingFileNode', currentFetchingFileNode);
         Multivio.store.find(Multivio.FileRecord).setEach('numberOfSearchResults', 0);

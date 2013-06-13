@@ -176,7 +176,7 @@ Multivio.FileRecord = SC.Record.extend({
     @field
     @type Boolean
   */
-  isFile: function () {
+  isFileNode: function () {
     return this.get('mime') ? YES : NO;
   }.property('mime').cacheable(),
 
@@ -187,15 +187,15 @@ Multivio.FileRecord = SC.Record.extend({
     @type FileRecord
   */
   nearestFileNode: function () {
-    return this.get('isFile') ? this : this.get('_ancestorFileNode');
-  }.property('isFile', '_ancestorFileNode').cacheable(),
+    return this.get('isFileNode') ? this : this.get('_ancestorFileNode');
+  }.property('isFileNode', '_ancestorFileNode').cacheable(),
   
   /**
     @field
     @type Boolean
   */
-  isContent: function () {
-    if (this.get('isFile')) {
+  isContentNode: function () {
+    if (this.get('isFileNode')) {
       return this.get('mime').match(/xml/) ? NO : YES;
     }
     return NO;
@@ -209,7 +209,7 @@ Multivio.FileRecord = SC.Record.extend({
     if (!this.get('mime')) {
       return NO;
     }
-    if (this.get('isFile')) {
+    if (this.get('isFileNode')) {
       return this.get('mime').match(/pdf/) ? YES: NO;
     }
     return NO;
@@ -232,7 +232,7 @@ Multivio.FileRecord = SC.Record.extend({
     if (!this.get('mime')) {
       return NO;
     }
-    if (this.get('isFile')) {
+    if (this.get('isFileNode')) {
       return this.get('mime').match(/image/) ? YES : NO;
     }
     return NO;
@@ -263,16 +263,16 @@ Multivio.FileRecord = SC.Record.extend({
     @type String
   */
   icon: function () {
-    return this.get('isFetchable') || this.get('isContent') ? 'icon-fethchable-file' : null;
-  }.property('isFetchable', 'isContent').cacheable(),
+    return this.get('isFetchable') || this.get('isContentNode') ? 'icon-fethchable-file' : null;
+  }.property('isFetchable', 'isContentNode').cacheable(),
 
   /**
     @field
     @type Boolean
   */
   isFetchable: function () {
-    return (!this.get('isFile') && !this.get('isFinal') && !this.get('children')) ? YES : NO;
-  }.property('isFile', 'isFinal', 'children').cacheable(),
+    return (!this.get('isFileNode') && !this.get('isFinal') && !this.get('children')) ? YES : NO;
+  }.property('isFileNode', 'isFinal', 'children').cacheable(),
 
   /**
     Append the child to a fetchable node (fetchable nodes have a single child)
@@ -300,27 +300,27 @@ Multivio.FileRecord = SC.Record.extend({
       return NO;
     }
     //is fileNode and has no children
-    if (this.get('isFile')) {
+    if (this.get('isFileNode')) {
       return YES;
     }
-    // ancestor FileNode already in the tree
+    // ancestor file node already in the tree
     var _ancestorFileNode = this.get('_ancestorFileNode');
     if (_ancestorFileNode && (_ancestorFileNode.get('url') === this.get('url'))) {
       return YES;
     }
     return NO;
-  }.property('children', 'isFile', '_ancestorFileNode', 'url').cacheable(),
+  }.property('children', 'isFileNode', '_ancestorFileNode', 'url').cacheable(),
 
   /**
     @field
     @type Array
   */
   fetchableNodes: function () {
-    if (this.get('isContent') || !this.get('isFile')) {
+    if (this.get('isContentNode') || !this.get('isFileNode')) {
       return null;
     }
     return this._getFetchableNodes(this.get('treeItemChildren'));
-  }.property('treeItemChildren', 'isContent', 'isFile'),
+  }.property('treeItemChildren', 'isContentNode', 'isFileNode'),
 
   /**
     @private
@@ -334,7 +334,7 @@ Multivio.FileRecord = SC.Record.extend({
     var toReturn = [];
     children.forEach(function (item) {
       //SC.Logger.debug(item.statusString());
-      if (item.get('isFetchable') || item.get('isFile')) {
+      if (item.get('isFetchable') || item.get('isFileNode')) {
         toReturn.pushObject(item);
       } else {
         var toAdd = this._getFetchableNodes(item.get('treeItemChildren'));
@@ -376,7 +376,7 @@ Multivio.FileRecord = SC.Record.extend({
           tmp = Multivio.store.createRecord(Multivio.FileRecord, item, guid);
         }
 
-        if (this.get('isFile')) {
+        if (this.get('isFileNode')) {
           tmp.set('_ancestorFileNode', this);
         } else {
           tmp.set('_ancestorFileNode', this.get('_ancestorFileNode'));
@@ -491,12 +491,12 @@ Multivio.FileRecord = SC.Record.extend({
     @type FileRecord
   */
   nextFile: function () {
-    if (!this.get('isFile')) {
+    if (!this.get('isFileNode')) {
       return null;
     }
     //rootNode
     return this._nextFile(this, null);
-  }.property('isContent', '_ancestorFileNode', 'treeItemChildren'),
+  }.property('isContentNode', '_ancestorFileNode', 'treeItemChildren'),
 
   /**
     @field
@@ -511,20 +511,20 @@ Multivio.FileRecord = SC.Record.extend({
   */
   lastChild: function () {
     
-    if (!this.get('isFile')) {
+    if (!this.get('isFileNode')) {
       return NO;
     }
 
     //rootNode
     return this._lastChild(this, null);
-  }.property('isContent', '_ancestorFileNode', 'treeItemChildren'),
+  }.property('isContentNode', '_ancestorFileNode', 'treeItemChildren'),
 
   /**
     @field
     @type Boolean
   */
   hasPreviousFile: function () {
-    if (!this.get('isFile')) {
+    if (!this.get('isFileNode')) {
       return NO;
     }
 
@@ -534,7 +534,7 @@ Multivio.FileRecord = SC.Record.extend({
     }
     
     return this._previousFile(ancestor, this);
-  }.property('isContent', '_ancestorFileNode', 'treeItemChildren'),
+  }.property('isContentNode', '_ancestorFileNode', 'treeItemChildren'),
 
 
   /**

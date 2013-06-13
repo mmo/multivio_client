@@ -15,12 +15,13 @@
 sc_require('views/side_toolbar_item.js');
 sc_require('controllers/side_toolbar.js');
 
-Multivio.SideToolbarView = SC.SourceListView.design({
+//Multivio.SideToolbarView = SC.SourceListView.design({
+Multivio.SideToolbarView = SC.ListView.design({
   classNames: 'mvo-side_toolbar'.w(),
   allowDeselectAll: YES,
-  useToggleSelection: NO,
+  useToggleSelection: YES,
   acceptsFirstResponder: NO,
-  selectOnMouseDown: YES,
+//  selectOnMouseDown: YES,
   layout: { top: 12, left: 4, bottom: 40, width: 32},
   layerId: 'mvo-side-toolbar',
   contentValueKey: 'panel',
@@ -29,11 +30,7 @@ Multivio.SideToolbarView = SC.SourceListView.design({
   contentBinding: 'Multivio.sideToolbarController.content',
   exampleView: Multivio.SideToolbarItemView,
   rowHeight: 32,
-  rowSpacing: 8,
-
-  _hello: function () {
-    SC.Logger.debug('hello');
-  },
+  rowSpacing: 8
 
   //bug correction
   // mouseDown: function (ev) {
@@ -55,9 +52,5 @@ Multivio.SideToolbarView = SC.SourceListView.design({
   //   }
   //   return status;
   // },
-
-  _didChange: function () {
-    SC.Logger.debug('itemView: changed'); 
-  }.observes('selection')
 
 });

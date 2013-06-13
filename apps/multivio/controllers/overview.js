@@ -37,15 +37,17 @@ Multivio.overviewController = SC.ObjectController.create({
     @type String
   */
   currentUrl: function () {
-    if (this.get('isContent')) {
+    if (this.get('isContentNode')) {
       //pdf check
       if (this.get('isPDF') || this.get('isImage')) {
         var scaleFactor = this.get('_zoomScale')[this.get('_currentZoomIndex')],
           newUrl,
           angle = -this.get('rotationAngle');
-        return "%@max_width=%@&max_height=%@&angle=%@&%@"
+        var url = "%@max_width=%@&max_height=%@&angle=%@&%@"
           .fmt(this.get('_renderPrefix'), this.get('imageWidth'), 
-               this.get('imageWidth'), angle, this.get('_currentUrl'));
+            this.get('imageWidth'), angle, this.get('_currentUrl'));
+        SC.Logger.warn('In overviewController, url = ' + url);
+        return url;
       }
     } 
     return undefined;

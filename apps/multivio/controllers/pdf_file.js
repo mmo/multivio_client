@@ -36,6 +36,7 @@ Multivio.pdfFileController = SC.ObjectController.create(Multivio.DisplayImage, {
   _appOptionsBinding: SC.Binding.oneWay('Multivio.inputParameters.options'),
 
   _zoomScale: [0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0],
+  _nativeZoomIndex: 7,
   _currentZoomIndex: 7,
   mimeRegExp: '.*?/pdf',
 
@@ -45,19 +46,6 @@ Multivio.pdfFileController = SC.ObjectController.create(Multivio.DisplayImage, {
 
   infoMessage: function () {
     return "Page: %@/%@".fmt(this.get('currentPage'), this.get('nPages'));
-  }.property('currentPage', 'nPages'),
-
-  hundredPercentZoom: function () {
-    this.setIfChanged('_currentZoomIndex', 7);
-    this.setIfChanged('mode', Multivio.ZOOM_MODE);
-  },
-
-  hundredPercentZoomEnabled: function () {
-    if (this.get('_currentZoomIndex') !== 7 || 
-        this.get('mode') !== Multivio.ZOOM_MODE) {
-      return YES;
-    }
-    return NO;
-  }.property('_currentZoomIndex', 'mode').cacheable()
+  }.property('currentPage', 'nPages')
   
 });
