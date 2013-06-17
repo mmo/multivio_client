@@ -47,6 +47,10 @@
 - selected item in tree view is not always the one that is clicked (seems to happen when there are several tree entries for the same page) - check record 13146
 - the active/inactive state is not always correct for the navigation buttons (<<, <, >, >>)
 
+## Nice-to-haves
+
+- provide better visual info when switching pages, resolution, rotation, etc.
+
 
 ----------------------------------------------
 

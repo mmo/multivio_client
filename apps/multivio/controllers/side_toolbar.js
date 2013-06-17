@@ -19,69 +19,57 @@ sc_require('views/search.js');
 
 Multivio.sideToolbarController = SC.ArrayController.create({
 
-  allowsMultipleSelection: YES,
-
-  /**
-    Some of the tools in the sidebar are mutually exclusive: the search, tree, thumbnail
-    and help panels. Only one of them can be open at the same time.
-  */
-  currentExclusivePanel: null,
+  currentOpenPanel: null,
 
   content: [
     SC.Object.create({
       panel: 'mainPage.searchView',
-      icon: static_url("images/icons/24x24/search_light_24x24.png"),
-      isExclusive: YES
+      icon: static_url("images/icons/24x24/search_light_24x24.png")
     }),
     
     SC.Object.create({
       panel: 'mainPage.treeView',
-      icon: static_url("images/icons/24x24/tree_light_24x24.png"),
-      isExclusive: YES
+      icon: static_url("images/icons/24x24/tree_light_24x24.png")
     }),
 
     SC.Object.create({
       panel: 'mainPage.thumbnailsView',
-      icon: static_url("images/icons/24x24/thumbnails_light_24x24.png"),
-      isExclusive: YES
+      icon: static_url("images/icons/24x24/thumbnails_light_24x24.png")
     }),
 
     SC.Object.create({
       panel: 'download',
       icon: static_url("images/icons/24x24/download_light_24x24.png"),
-      action: 'download',
-      isExclusive: NO
+      action: 'download'
     }),
     
     SC.Object.create({
       panel: 'mainPage.bottomToolbarView',
-      icon: static_url("images/icons/24x24/show_toolbar_light_24x24.png"),
-      //action: 'showBottomToolbar',
-      isExclusive: NO
+      icon: static_url("images/icons/24x24/show_toolbar_light_24x24.png")
+      //action: 'showBottomToolbar'
     }),
 
     SC.Object.create({
       panel: 'mainPage.helpPane',
-      icon: static_url("images/icons/24x24/help_light_24x24.png"),
-      isExclusive: YES
+      icon: static_url("images/icons/24x24/help_light_24x24.png")
     })
   ],
 
   _selectionDidChange: function () {
     var panelName;
     var sel = this.get('selection');
-    SC.Logger.debug('sideToolbar: selection changed! nb of items: ' + sel.length());
+    SC.Logger.debug('sideToolbar: selection changed! ' + sel.length());
     if (!SC.none(sel) && sel.length() > 0) {
-      var panelName = sel.firstObject().get('panel');
+      panelName = sel.firstObject().get('panel');
       var action = sel.firstObject().get('action');
-      var previousExclusivePanel = this.get('currentExclusivePanel');
-      if (!SC.none(previousExclusivePanel) && panelName !== previousExclusivePanel) {
-        if (Multivio.getPath(previousExclusivePanel).remove) {
-          Multivio.getPath(previousExclusivePanel).remove();
+      var oldPanelName = this.get('currentOpenPanel');
+      if (!SC.none(oldPanelName) && panelName !== oldPanelName) {
+        if (Multivio.getPath(oldPanelName).remove) {
+          Multivio.getPath(oldPanelName).remove();
         }
       }
-      this.set('currentExclusivePanel', panelName);
-      SC.Logger.debug('New excluisve panel: ' + panelName);
+      this.set('currentOpenPanel', panelName);
+      SC.Logger.debug('Panel Name: ' + panelName);
       if (Multivio.getPath(panelName)) {
         Multivio.getPath(panelName).append();
       } else {
@@ -89,13 +77,13 @@ Multivio.sideToolbarController = SC.ArrayController.create({
       }
     }
     if (sel.length() === 0) {
-      panelName = this.get('currentExclusivePanel');
+      panelName = this.get('currentOpenPanel');
       if (!SC.none(panelName)) {
         if (Multivio.getPath(panelName)) {
           Multivio.getPath(panelName).remove();
         }
       }
-      this.set('currentExclusivePanel', undefined);
+      this.set('currentOpenPanel', undefined);
     }
   }.observes('selection'),
 
