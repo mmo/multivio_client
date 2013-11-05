@@ -15,6 +15,16 @@
 - tests and IE (5 days)
 
 
+## SproutCore compliance checking
+
+- new image fitting approach in SC.ImageView (from SC.InnerFrame mixin)
+- new animation approach introduced in 1.10.0
+- in mixins, make sure properties are initialized in initMixin() and destroyed in destroyMixin(), in order to avoid them being shared by all client ojects
+- replace extend() by design() in view declarations
+- remove use of "treeItemChildrenKey" (chap. "Tree Controller" in Tyler's book)
+- move functionality out of record classes into controllers (chap. "Working with SproutCore's controllers" in Tyler's book)
+
+
 ## Related to code review and documentation
 
 - review TODOs
@@ -37,7 +47,7 @@
 ## Code-tidy
 
 - update copyright header message in all files (2009-2013)
-- check JSDoc compliance
+- check JSDoc compliance `jsdoc2 -d=tmp/out -a -r apps/multivio/`
 - adjust all occurrences of "} else"
 - check SproutCore JS guidelines http://guides.sproutcore.com/style_guide.html
 
@@ -46,6 +56,7 @@
 
 - selected item in tree view is not always the one that is clicked (seems to happen when there are several tree entries for the same page) - check record 13146
 - the active/inactive state is not always correct for the navigation buttons (<<, <, >, >>)
+
 
 ## Nice-to-haves
 
@@ -83,3 +94,11 @@
 
 - calendar (3 day)
 - pre-indexing (2 day)
+
+----------------------------------------------
+
+Document docs generation
+
+1. install nodejs <http://nodejs.org>
+2. install jsdoc2 (node-based alternate version) <https://npmjs.org/package/jsdoc2>
+	$ [sudo] npm install -g jsdoc2

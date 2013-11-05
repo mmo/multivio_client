@@ -17,15 +17,13 @@ Although SproutCore allows multiple applications in a single project, the Multiv
 
 The app employs a standard SproutCore folder structure, with the following additions:
 
-- folders:
-	 - **`apps/multivio/docs/`** - local project documentation
-- files:
-	 - **`apps/multivio/configurator.js`** - application configuration
+- **`apps/multivio/docs/`** - a folder with local project documentation
+- **`apps/multivio/configurator.js`** - file with application configuration
 
 
 #### Important files in the `apps` folder
 
-(See also the files mentioned in the _Loading sequence_ section.)
+(See also the files mentioned in the _Loading sequence_ section below.)
 
 ##### `apps/resources/main_page`
 
@@ -94,10 +92,13 @@ The `main.js` file is very basic: it starts the application and initializes the 
 
 ## Important SproutCore-related facts
 
-- views use absolute positioning [http://guides.sproutcore.com/views.html]
-- 
+### Absolute positioning
 
-### `statecharts/main_statechart.js`
+Views use absolute positioning [http://guides.sproutcore.com/views.html]
 
-The root application state is defined in the file `main_statechart.js`. Together, the files inside the `statecharts` folder define the complete applicaton statechart. This is where the core of the application lives, hence is very important for its understanding. A graphical representation of the statechart is provided in `docs/multivio_client_statechart.graffle` (which is in OmniGraffle format - a PDF version is provided for convenience).
+### Statechart controls the app
+
+`statecharts/main_statechart.js`
+
+The root application state is defined in the file `main_statechart.js`. Together, the files inside the `statecharts` folder define the complete applicaton statechart. This is where the core of the application lives, hence is very important for its understanding. A graphical representation of the statechart is provided in `docs/multivio_client_statechart.graffle` (which is in OmniGraffle format; a PDF version is provided for convenience).
 
