@@ -12,11 +12,13 @@
 */
 sc_require('controllers/overview.js');
 
-Multivio.Overview = SC.PalettePane.design(SC.Animatable, {
+Multivio.Overview = SC.PalettePane.design({
+  // TODO: disabled for compatibility with 1.10.0 - must reactivate using new
+  // transitions approach
   transitions: {
     // and add transitions
     // CSS-transition-only timing function (JavaScript gets linear)
-    opacity: {duration: 0.3, timing: SC.Animatable.TRANSITION_CSS_EASE_IN_OUT }
+    //opacity: {duration: 0.3, timing: SC.Animatable.TRANSITION_CSS_EASE_IN_OUT }
     //display: .75 // a bit longer than opacity 
   },
   layout: {bottom: 124, right: 30, width: 155, height: 155},

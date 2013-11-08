@@ -12,7 +12,7 @@ sc_require('mixins/image.js');
 
 /** @class
 
-  This controll the center view to display a pdf content.
+  This controlls the center view to display a pdf content.
 
   @author jma
   @extends SC.ObjectController

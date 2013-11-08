@@ -46,7 +46,7 @@ Multivio.overviewController = SC.ObjectController.create({
         var url = "%@max_width=%@&max_height=%@&angle=%@&%@"
           .fmt(this.get('_renderPrefix'), this.get('imageWidth'), 
             this.get('imageWidth'), angle, this.get('_currentUrl'));
-        SC.Logger.warn('In overviewController, url = ' + url);
+        SC.Logger.debug('Multivio.overviewController.currentUrl: ' + url);
         return url;
       }
     } 

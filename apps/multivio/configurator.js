@@ -9,7 +9,7 @@
 /**
   @namespace
 
-  Object that stores and manages all configuration parameters
+  Object that stores all configuration parameters
 
   @author che
   @extends SC.Object

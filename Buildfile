@@ -29,7 +29,7 @@ proxy '/local',
 # required libraries
 mode :all do
  config :all,
-   :required => [:sproutcore, 'sproutcore/animation', 'sproutcore/statechart'],
+   :required => [:sproutcore],
    :theme => 'sproutcore/ace',
    :css_theme => 'ace.mvo-basic'
 	 #:load_fixtures => true

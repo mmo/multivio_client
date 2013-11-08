@@ -27,12 +27,15 @@ Multivio.CenterImageView = SC.View.extend({
     classNames: "mvo-image-view".w(),
     layout: {left: 0, right: 0, top: 0, bottom: 0},
     canLoadInBackground: YES,
+    scale: SC.BEST_FIT,
+    /*
     imageDidLoad: function (url, imageOrError) {
       //TODO: why do I have to adjust width/height as the layout is defined to
       //take all the stuffs!
       this.adjust('width', this.get('image').width);
       this.adjust('height', this.get('image').height);
     }.observes('image'),
+    */
 
     //redifined this default method in order remove the defaultBlankImage
     _image_valueDidChange: function () {
@@ -73,10 +76,12 @@ Multivio.CenterImageView = SC.View.extend({
       }
     }.property('nativeSize', 'layout', 'rotationAngle'),
 
+    /* TODO: is this necessary? (check with SC.InnerImage.scale) */
     viewDidResize: function () {
       sc_super();
       this.reload(); 
     },
+
     _selectionDidChange: function () {
       var sel = this.get('selection');
       if (!SC.none(sel) && sel.firstObject()) {
@@ -91,7 +96,6 @@ Multivio.CenterImageView = SC.View.extend({
     layoutForContentIndex: function (contentIndex) {
       var current = this.get('content').objectAt(contentIndex);
       var zoomFactor = this.get('currentZoomFactor');
-      SC.Logger.debug("------> %@".fmt(this.get('nativeSize')));
       if (current) {
         var angle = this.get('rotationAngle');
         switch (Math.abs(angle % 360)) {
@@ -134,6 +138,7 @@ Multivio.CenterImageView = SC.View.extend({
       return NO;
       //Multivio.sideToolbarController.closeAll();
     },
+
     exampleView: SC.View.extend(SC.Control, {
       classNames: "mvo-search-results".w(),
       render: function (context) {
@@ -144,7 +149,7 @@ Multivio.CenterImageView = SC.View.extend({
     })
   }),
 
-  infoPanel: SC.NavigationBarView.design(SC.Animatable, Multivio.FadeInOut, {
+  infoPanel: SC.View.design(Multivio.FadeInOut, {
     classNames: "mvo-info-panel mvo-front-view-transparent".w(),
     layout: { centerX: 0, width: 100, height: 30, top: 16 },
     childViews: ['textView'],

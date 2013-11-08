@@ -43,7 +43,7 @@ Multivio.mainStatechart = SC.Object.create(SC.StatechartManager, {
       Multivio.set('store', SC.Store.create().from('Multivio.DataSource'));
       // show main pane
       Multivio.getPath('mainPage.mainPane').append();
-      //Multivio.inputParameters.read();
+      //Multivio.resetApp();
     },
 
     /**
@@ -81,7 +81,7 @@ Multivio.mainStatechart = SC.Object.create(SC.StatechartManager, {
 
       // STATE TRANSITION
       this.gotoState('waitingForServer', server);
-    }.observes('*inputParameters.options'),
+    }.stateObserves('*inputParameters.options'),
     
     /**
       SUBSTATE DECLARATION (transient)
@@ -127,13 +127,13 @@ Multivio.mainStatechart = SC.Object.create(SC.StatechartManager, {
           Multivio.getPath('loadingPage.mainPane').remove();
 
           // STATE TRANSITION
-          this.gotoState('applicationReady'); 
+          this.gotoState('applicationReady');
         }
-        /*TODO: check status to go to error*/
-        /*else{
-        this.gotoState('error', {msg: 'Server is not compatible'});  
-        }*/
-      }.observes('*server.status')
+        /* TODO: properly manage error checking and reporting */
+        else{
+          this.gotoState('error', {msg: 'Problem connecting to server'});
+        }
+      }.stateObserves('*server.status')
     })
   }),
 
@@ -218,7 +218,7 @@ Multivio.mainStatechart = SC.Object.create(SC.StatechartManager, {
                 currentFetchingRootNode.getPath('nextFile')); 
           }
         }
-      }.observes('*currentFetchingRootNode.mime'),
+      }.stateObserves('*currentFetchingRootNode.mime'),
 
 
       /**

@@ -227,7 +227,7 @@ Multivio.DisplayingContentState = SC.State.extend({
         Multivio.pdfFileController.set('currentPage', currentPage);
         Multivio.getPath('mainPage.mainPdfView.pdfScrollView.contentView.infoPanel').displayBar();
       }
-    }.observes('currentPage')
+    }.stateObserves('currentPage')
   }),
 
   /**

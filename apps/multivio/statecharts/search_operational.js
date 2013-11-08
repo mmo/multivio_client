@@ -81,7 +81,7 @@ Multivio.SearchOperationalState = SC.State.extend({
   _currentFileIndexDidChange : function () {
     // STATECHART EVENT TRIGGER
     Multivio.mainStatechart.sendEvent('updateHighlighting');
-  }.observes('*currentFileNode.currentIndex'),
+  }.stateObserves('*currentFileNode.currentIndex'),
 
   /** @private */
   _currentFileNodeDidChange : function () {
@@ -94,7 +94,7 @@ Multivio.SearchOperationalState = SC.State.extend({
         Multivio.mainStatechart.sendEvent('updateSearch', currentUserQuery);
       }
     }
-  }.observes('*currentFileNode.url'),
+  }.stateObserves('*currentFileNode.url'),
 
   /** @private */
   _currentUserSearchQueyDidChange : function () {
@@ -103,7 +103,7 @@ Multivio.SearchOperationalState = SC.State.extend({
       // STATECHART EVENT TRIGGER
       Multivio.mainStatechart.sendEvent('updateSearch', currentUserQuery);
     }
-  }.observes('*searchTreeController.currentUserQuery'),
+  }.stateObserves('*searchTreeController.currentUserQuery'),
   
   /** @private */
   _searchInAllFilesDidChange : function () {
@@ -114,7 +114,7 @@ Multivio.SearchOperationalState = SC.State.extend({
       // STATECHART EVENT TRIGGER
       Multivio.mainStatechart.sendEvent('searchInCurrentFile');
     }
-  }.observes('*searchTreeController.searchInAllFiles'),
+  }.stateObserves('*searchTreeController.searchInAllFiles'),
 
 
   /************** SubStates *************************/
@@ -193,7 +193,7 @@ Multivio.SearchOperationalState = SC.State.extend({
         Multivio.mainStatechart.sendEvent('updateHighlighting');
         this._concludeSearchProcess('Done', Multivio.LOADING_DONE);
       }
-    }.observes('*currentSearchResults.status'),
+    }.stateObserves('*currentSearchResults.status'),
 
     /**
       @param String statusMessage
@@ -385,7 +385,7 @@ Multivio.SearchOperationalState = SC.State.extend({
 
         this._proceedSearchWithNextFile();
       }
-    }.observes('*currentSearchResults.status'),
+    }.stateObserves('*currentSearchResults.status'),
 
     /**
       STATE EVENT (transient)
@@ -409,7 +409,7 @@ Multivio.SearchOperationalState = SC.State.extend({
           this._proceedSearchWithNextFile();
         }
       }
-    }.observes('*currentFetchingFileNode.mime'),
+    }.stateObserves('*currentFetchingFileNode.mime'),
 
     /**
       @param String statusMessage

@@ -77,9 +77,11 @@ Multivio.FileRecord = SC.Record.extend({
     @type Array
   */
   defaultNativeSize: SC.Record.attr(Array),
+
   /**
-    The list of exceptions to the default native size. It's an array of
-    objects like ["2": [ 594.0, 843.0 ]]
+    In a multi-page document file (PDF), this is the list of exceptions to the
+    file's default page native size. It's an array of objects like
+    ["2": [ 594.0, 843.0 ]], with an entry per non-standard page
     @type Array
   */
   nativeSizes: SC.Record.attr(Object),

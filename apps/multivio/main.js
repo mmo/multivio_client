@@ -13,7 +13,7 @@
 // As you develop your application you will probably want to override this.
 // See comments for some pointers on what to do next.
 //
-Multivio.reload = function () {
+Multivio.resetApp = function () {
   SC.Logger.debug('New input');
   // STATECHART EVENT TRIGGER
   // Multivio.mainStatechart.sendEvent('main');
@@ -37,7 +37,7 @@ Multivio.main = function main() {
 
   // Set the content property on your primary controller
   // ex: Multivio.contactsController.set('content',Multivio.contacts);
-  SC.routes.add('*', Multivio, 'reload');
+  SC.routes.add('*', Multivio, 'resetApp');
   Multivio.mainStatechart.initStatechart();
 
   // With the following statetement... "[...] what you are doing is telling the

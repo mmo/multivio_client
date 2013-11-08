@@ -62,7 +62,6 @@ Multivio.treeController = SC.TreeController.create({
       var i;
       for (i = 0; i < children.length; i++) {
         var childIndex = children[i].get('index');
-        SC.Logger.debug('%@ <= %@'.fmt(childIndex, index));
         if (childIndex <= index) {
           bestIndex = i;
         }

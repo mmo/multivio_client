@@ -53,7 +53,7 @@ Multivio.SearchView = SC.PalettePane.design({
   isModal: NO,
   layout: {left: 45, top: 10, width: 314, bottom: 100},
   classNames: 'mvo-palette-pane'.w(),
-  layerId: 'mvo-tree-view',
+  layerId: 'mvo-search-tree-view',
   canBeClosed: YES,
   contentView: SC.View.design({
     childViews: [

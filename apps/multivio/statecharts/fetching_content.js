@@ -70,7 +70,7 @@ Multivio.FetchingContentState = SC.State.extend(/** @scope Multivio.FetchingCont
           this.gotoState('fetchingNextContent', fileNode.getPath('nextFile'));
         }
       }
-    }.observes('*fileNodeBeingFetched.mime')
+    }.stateObserves('*fileNodeBeingFetched.mime')
 
   }),
   
@@ -117,8 +117,7 @@ Multivio.FetchingContentState = SC.State.extend(/** @scope Multivio.FetchingCont
           this.gotoState('fetchingPreviousContent', fileNode.getPath('lastChild'));
         }
       }
-    }.observes('*fileNodeBeingFetched.mime')
-
+    }.stateObserves('*fileNodeBeingFetched.mime')
   }),
   
   

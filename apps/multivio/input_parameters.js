@@ -11,6 +11,8 @@
   @namespace
 
   Object that stores the app's input options read from the entry URL
+
+  TODO: remove this file if not needed anymore
 */
 
 /** @class

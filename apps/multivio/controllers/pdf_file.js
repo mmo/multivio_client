@@ -14,7 +14,8 @@ sc_require('controllers/current_file_node.js');
 
 /** @class
 
-  This controll the center view to display a pdf content.
+  This controlls a PDF file record and allows the center view to display
+  PDF content.
 
   @author jma
   @extends SC.ObjectController

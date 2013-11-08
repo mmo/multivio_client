@@ -67,6 +67,8 @@ Multivio = SC.Application.create({
   */
   inputParameters: SC.Object.create({
 
+    // TODO: simplify by putting input parameters in configurator?
+    // (check all its clients)
     options: {},
 
     read: function () {

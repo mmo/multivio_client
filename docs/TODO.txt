@@ -47,7 +47,7 @@
 ## Code-tidy
 
 - update copyright header message in all files (2009-2013)
-- check JSDoc compliance `jsdoc2 -d=tmp/out -a -r apps/multivio/`
+- check JSDoc compliance `jsdoc2 -d=docs/jsdoc -a -r apps/multivio/`
 - adjust all occurrences of "} else"
 - check SproutCore JS guidelines http://guides.sproutcore.com/style_guide.html
 

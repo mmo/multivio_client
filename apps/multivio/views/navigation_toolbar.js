@@ -14,7 +14,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
   isAnchored: YES,
   canBeClosed: YES,
 
-  contentView: SC.NavigationBarView.design({
+  contentView: SC.View.design({
     layout: { left: 0, right: 0, top: 0, bottom: 0 },
     classNames: 'mvo-front-view-transparent'.w(),
     acceptsFirstResponder: NO,

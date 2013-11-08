@@ -94,7 +94,7 @@ Multivio.DisplayImage = {
 
   loadingPage: function () {
     var status = this.get('_centerImageStatus');
-    SC.Logger.debug('------> loadingPage ' + status);
+    SC.Logger.debug('Multivio.DisplayImage.loadingPage: ' + status);
     return status === SC.IMAGE_STATE_LOADING ? YES : NO;
   }.property('_centerImageStatus').cacheable(),
   
