@@ -1,8 +1,11 @@
-// ==========================================================================
-// Project:   MyApp.DataSource
-// Copyright: ©2011 My Company, Inc.
-// ==========================================================================
-/*globals MyApp */
+/**
+==============================================================================
+  Project:    Multivio - https://www.multivio.org/
+  Copyright:  (c) 2009-2014 RERO
+  License:    See file COPYING
+==============================================================================
+*/
+
 sc_require('models/file.js');
 sc_require('models/server.js');
 /** @class

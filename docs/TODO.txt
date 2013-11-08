@@ -46,7 +46,6 @@
 
 ## Code-tidy
 
-- update copyright header message in all files (2009-2013)
 - check JSDoc compliance `jsdoc2 -d=docs/jsdoc -a -r apps/multivio/`
 - adjust all occurrences of "} else"
 - check SproutCore JS guidelines http://guides.sproutcore.com/style_guide.html
@@ -84,6 +83,8 @@
 - rename 'toolbar' -> 'navigation toolbar' and 'navigation bar' -> 'side toolbar'
 - factorize toolbar view from image/pdf/... views
 - the 1:1 button does not have the same behaviour as the other two predefined-zoom buttons
+
+- update copyright header message in all files (2009-2013)
 
 
 ----------------------------------------------

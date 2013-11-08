@@ -1,8 +1,10 @@
-// ==========================================================================
-// Project:   Multivio.treeController
-// Copyright: ©2011 My Company, Inc.
-// ==========================================================================
-/*globals Multivio */
+/**
+==============================================================================
+  Project:    Multivio - https://www.multivio.org/
+  Copyright:  (c) 2009-2014 RERO
+  License:    See file COPYING
+==============================================================================
+*/
 
 Multivio.LOADING_DONE = "done";
 Multivio.LOADING_LOADING = "loading";
