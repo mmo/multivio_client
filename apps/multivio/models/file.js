@@ -86,7 +86,7 @@ Multivio.FileRecord = SC.Record.extend({
     ["2": [ 594.0, 843.0 ]], with an entry per non-standard page
     @type Array
   */
-  nativeSizes: SC.Record.attr(Object),
+  sizeExceptions: SC.Record.attr(Object, {key: 'defaultNativeSizes' }),
   /**
     Child nodes
     @type Array
@@ -152,8 +152,8 @@ Multivio.FileRecord = SC.Record.extend({
     to_return += "Title: %@\n".fmt(this.get('title'));
     to_return += "mime: %@\n".fmt(this.get('mime'));
     to_return += "Number of pages: %@\n".fmt(this.get('nPages'));
-    to_return += "Native size: %@\n".fmt(this.get('nativeSizes'));
     to_return += "Default native size: %@\n".fmt(this.get('defaultNativeSize'));
+    to_return += "Size exceptions: %@\n".fmt(this.get('sizeExceptions'));
     to_return += "Children: %@\n".fmt(this.get('children'));
     return to_return;
   },
@@ -370,7 +370,6 @@ Multivio.FileRecord = SC.Record.extend({
         var tmp;
         if (Multivio.store.storeKeyExists(Multivio.FileRecord, guid)) {
           tmp = Multivio.store.find(Multivio.FileRecord, guid);
-          SC.Logger.warn('fusion');
           if (tmp.get('fetchableChild')) {
             var fileNode = tmp.get('fetchableChild');
             fileNode.title = tmp.get('title');

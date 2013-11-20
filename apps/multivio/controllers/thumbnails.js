@@ -9,6 +9,15 @@
 sc_require('controllers/pdf_file.js');
 sc_require('controllers/image_file.js');
 
+
+/********************************************************************
+  THIS FILE CONTAINS THE FOLLOWING MIXINS AND OBJECTS:
+  - Multivio.ThumbnailsControllerMixin
+  - Multivio.imageThumbnailsController
+  - Multivio.pdfThumbnailsController
+ ********************************************************************/
+
+
 /**
   @namespace
   @mixin
@@ -19,7 +28,7 @@ sc_require('controllers/image_file.js');
   The methods _nPagesDidChange() and _thumbnailURL() must be defined in each
   actual controller that includes this mixin.
 */
-Multivio.thumbnailsControllerMixin = {
+Multivio.ThumbnailsControllerMixin = {
 
   /** @field */
   content: [],
@@ -119,20 +128,20 @@ Multivio.thumbnailsControllerMixin = {
 
   This is the thumbnailView controller for a list of images.
 
-  @see Multivio.thumbnailsControllerMixin
+  @see Multivio.ThumbnailsControllerMixin
   @author jma
   @extends SC.ArrayController
 */
 Multivio.imageThumbnailsController = SC.ArrayController.create(
-    Multivio.thumbnailsControllerMixin, {
+    Multivio.ThumbnailsControllerMixin, {
 
   /**
-    Binds a property declared in thumbnailsControllerMixin
+    Binds a property declared in ThumbnailsControllerMixin
   */
   nPagesBinding: SC.Binding.oneWay('Multivio.imageFileController.nPages'),
 
   /**
-    Binds a property declared in thumbnailsControllerMixin
+    Binds a property declared in ThumbnailsControllerMixin
   */
   currentPageBinding: 'Multivio.imageFileController.currentPage',
 
@@ -142,7 +151,7 @@ Multivio.imageThumbnailsController = SC.ArrayController.create(
 
   /* Observe changes and update the thumbnails */
   _nPagesDidChange: function () {
-    // calls a method declared in thumbnailsControllerMixin
+    // calls a method declared in ThumbnailsControllerMixin
     this._updateThumbnails();
   }.observes('nPages', 'urls').cacheable(),
 
@@ -159,20 +168,20 @@ Multivio.imageThumbnailsController = SC.ArrayController.create(
 
   This is the thumbnailView controller for a PDF.
   
-  @see Multivio.thumbnailsControllerMixin
+  @see Multivio.ThumbnailsControllerMixin
   @author jma
   @extends SC.ArrayController
 */
 Multivio.pdfThumbnailsController = SC.ArrayController.create(
-    Multivio.thumbnailsControllerMixin, {
+    Multivio.ThumbnailsControllerMixin, {
   
   /**
-    Binds a property declared in thumbnailsControllerMixin
+    Binds a property declared in ThumbnailsControllerMixin
   */
   nPagesBinding: SC.Binding.oneWay('Multivio.pdfFileController.nPages'),
 
   /**
-    Binds a property declared in thumbnailsControllerMixin
+    Binds a property declared in ThumbnailsControllerMixin
   */
   currentPageBinding: 'Multivio.pdfFileController.currentPage',
 
@@ -182,7 +191,7 @@ Multivio.pdfThumbnailsController = SC.ArrayController.create(
 
   /* Observe changes and update the thumbnails */
   _nPagesDidChange: function () {
-    // calls a method declared in thumbnailsControllerMixin
+    // calls a method declared in ThumbnailsControllerMixin
     this._updateThumbnails();
   }.observes('nPages', 'url').cacheable(),
 

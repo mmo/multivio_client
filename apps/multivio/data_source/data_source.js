@@ -30,7 +30,7 @@ Multivio.DataSource = SC.DataSource.extend({
 
   fetch: function (store, query) {
 
-    SC.Logger.debug("new query");
+    SC.Logger.debug("Multivio.DataSource.fetch: " + query.get('parameters'));
     // TODO: Add handlers to fetch data for specific queries.  
     // call store.dataSourceDidFetchQuery(query) when done.
     var record_type = query.get('recordType');

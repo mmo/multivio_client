@@ -100,7 +100,43 @@ Multivio = SC.Application.create({
       this.endPropertyChanges();
     }
   }),
-  
-  navigationTarget: null
+
+  /**
+    TODO: document this - VERY IMPORTANT APPLICATION PROPERTY
+   */
+  currentContentController: null
 
 });
+
+/************************************
+  Character codes for keyboard events
+ ************************************/
+
+// TODO check proper usage of keyboard events all over the application
+
+Multivio.KEYCODES = {
+  SPACE:        32,
+  ENTER:        13,
+  TAB:           9,
+  ESCAPE:       27,
+  BACKSPACE:     8,
+  
+  SHIFT:        16,
+  CONTROL:      17,
+  ALT:          18,
+  CAPSLOCK:     20,
+  
+  LEFT_ARROW:   37,
+  UP_ARROW:     38,
+  RIGHT_ARROW:  39,
+  DOWN_ARROW:   40,
+  
+  DELETE:       42,
+  HOME:         36,
+  END:          35,
+  PAGE_UP:      33,
+  PAGE_DOWN:    34,
+  
+  PLUS:         43,
+  MINUS:        45
+}

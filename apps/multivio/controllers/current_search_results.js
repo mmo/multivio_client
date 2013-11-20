@@ -25,7 +25,8 @@ Multivio.currentSearchResultsController = SC.ArrayController.create(
 
   @extends SC.Object
 */
-Multivio.searchTreeController = SC.TreeController.create( /** @scope Multivio.searchTreeController.prototype */ {
+Multivio.searchTreeController = SC.TreeController.create(
+    /** @scope Multivio.searchTreeController.prototype */ {
 
   allowsMultipleSelection: NO,
   currentUserQuery: null,
@@ -76,6 +77,8 @@ Multivio.searchTreeController = SC.TreeController.create( /** @scope Multivio.se
       if (!selectedIndex) {
         selectedIndex = 1;
       }
+      // TODO: should send an event to the statechart instead of invoking the
+      // other controller directly?
       Multivio.setPath('currentFileNodeController.content', currentSelection.get('_ancestorFileNode'));
       Multivio.currentFileNodeController.set('currentIndex', selectedIndex);
     }

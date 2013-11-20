@@ -7,6 +7,14 @@
 */
 
 
+/********************************************************************
+  THIS FILE CONTAINS THE FOLLOWING MIXINS FOR THE USER INTERFACE:
+  - Multivio.InnerGradient
+  - Multivio.InnerGradientThinTopBottom
+  - Multivio.OuterGradient
+ ********************************************************************/
+
+
 //////////////////////////////////////////////////////////////////////////////
 // MIXINS FOR THE USER INTERFACE
 //////////////////////////////////////////////////////////////////////////////
@@ -19,10 +27,9 @@
   Adds an inner gradient to a view.
 
   @author mmo
-  @extends SC.Object
   @since 0.3.0
 */
-Multivio.innerGradient = {
+Multivio.InnerGradient = {
   renderMixin: function (context, firstTime) {
     if (context.needsContent) {
       context.push(
@@ -42,10 +49,9 @@ Multivio.innerGradient = {
   Adds an inner gradient to a view, with thin top and bottom edges.
 
   @author dwy
-  @extends SC.Object
   @since 0.3.0
 */
-Multivio.innerGradientThinTopBottom = {
+Multivio.InnerGradientThinTopBottom = {
   renderMixin: function (context, firstTime) {
     if (context.needsContent) {
       context.push(
@@ -77,10 +83,9 @@ Multivio.innerGradientThinTopBottom = {
   
 
   @author mmo
-  @extends SC.Object
   @since 0.3.0
 */
-Multivio.outerGradient = {
+Multivio.OuterGradient = {
   renderMixin: function (context, firstTime) {
     if (context.needsContent) {
       context.push(

@@ -185,7 +185,7 @@ $theme.mvo-button-view.sc-collection-item.sel,
   border-radius: 4px;
 }
 
-.sc-image-button-view .img {
+$theme.sc-image-button-view {
   padding: 0px;
   cursor: pointer;
   background-position: center center;
@@ -211,13 +211,13 @@ $theme.mvo-button-view.sc-collection-item.sel,
 }
 
 /*
-.mvo-default-theme .sc-image-button-view {
+$theme.sc-image-button-view {
   border: 2px solid red;
 }
-.mvo-default-theme .sc-image-button-view.sel {
+$theme.sc-image-button-view.sel {
   border: 2px solid blue;
 }
-.mvo-default-theme .sc-image-button-view.focus {
+$theme.sc-image-button-view.focus {
   border: 2px solid blue;
 }
 */
@@ -228,59 +228,59 @@ Button images
 -----------------------------
 */
 
-.mvo-default-theme .sc-image-button-view .image-button-previous-doc {
+$theme.sc-image-button-view.image-button-previous-doc {
   background-image: sc_static("images/icons/24x24/jump_backwards_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-next-doc {
+$theme.sc-image-button-view.image-button-next-doc {
   background-image: sc_static("images/icons/24x24/jump_forward_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-previous-page {
+$theme.sc-image-button-view.image-button-previous-page {
   background-image: sc_static("images/icons/24x24/go_backwards_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-next-page {
+$theme.sc-image-button-view.image-button-next-page {
   background-image: sc_static("images/icons/24x24/go_forward_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-zoom-minus {
+$theme.sc-image-button-view.image-button-zoom-minus {
   background-image: sc_static("images/icons/24x24/zoom_minus_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-zoom-plus {
+$theme.sc-image-button-view.image-button-zoom-plus {
   background-image: sc_static("images/icons/24x24/zoom_plus_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-rotate-left {
+$theme.sc-image-button-view.image-button-rotate-left {
   background-image: sc_static("images/icons/24x24/rotate_left_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-rotate-right {
+$theme.sc-image-button-view.image-button-rotate-right {
   background-image: sc_static("images/icons/24x24/rotate_right_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-fit-width {
+$theme.sc-image-button-view.image-button-fit-width {
   background-image: sc_static("images/icons/24x24/full_width_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-fit-all {
+$theme.sc-image-button-view.image-button-fit-all {
   background-image: sc_static("images/icons/24x24/full_size_dark_24x24.png");
 }
-.sc-image-button-view .image-button-hundred-percent {
+.sc-image-button-view.image-button-hundred-percent {
    background-image: sc_static("images/icons/24x24/100_percent_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-overview {
+$theme.sc-image-button-view.image-button-overview {
    background-image: sc_static("images/icons/24x24/loupe_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .thumbnail_list_mode {
+$theme.sc-image-button-view .thumbnail_list_mode {
   background-image: sc_static("images/icons/24x24/thumbnail_list_dark_24x24.png");
 }
-.mvo-default-theme .sc-image-button-view .thumbnail_grid_mode {
+$theme.sc-image-button-view .thumbnail_grid_mode {
   background-image: sc_static("images/icons/24x24/thumbnail_grid_dark_24x24.png");
 }
 
-.mvo-default-theme .sc-image-button-view .image-button-search-16 {
+$theme.sc-image-button-view.image-button-search-16 {
   background-image: sc_static("images/icons/16x16/search_dark_16x16.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-cancel-16 {
+$theme.sc-image-button-view.image-button-cancel-16 {
   background-image: sc_static("images/icons/16x16/search_clear_16x16.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-down-16 {
+$theme.sc-image-button-view.image-button-down-16 {
   background-image: sc_static("images/icons/16x16/down_dark_16x16.png");
 }
-.mvo-default-theme .sc-image-button-view .image-button-up-16 {
+$theme.sc-image-button-view.image-button-up-16 {
   background-image: sc_static("images/icons/16x16/up_dark_16x16.png");
 }
 

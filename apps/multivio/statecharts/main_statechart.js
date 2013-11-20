@@ -186,7 +186,7 @@ Multivio.mainStatechart = SC.Object.create(SC.StatechartManager, {
 
       /** */
       enterState: function () {
-        Multivio.getPath('mainPage.mainPane').append();
+        //Multivio.getPath('mainPage.mainPane').append();
         var url_to_get = Multivio.getPath('inputParameters.options.url');
         var record = Multivio.store.find(Multivio.FileRecord, url_to_get);
         this.set('currentFetchingRootNode', record);

@@ -53,19 +53,16 @@ Multivio.SearchOperationalState = SC.State.extend({
   updateHighlighting: function () {
     var currentIndex = this.getPath('currentFileNode.currentIndex');
     var currentUserQuery = this.getPath('searchTreeController.currentUserQuery');
-    if (this.getPath('currentFileNode.isSearchable') && currentIndex > 0) {
+    if (this.getPath('currentFileNode.isSearchable') && currentIndex > 0 &&
+        !SC.none(currentUserQuery)) {
       // take the search query that corresponds to searching in the current
       // page and pass it to the search results controller, so that the
       // corresponding results are propagated to the highlight view
-      var query = SC.Query.local(
-          Multivio.SearchResultRecord,
-          "query={query} AND url={url} AND page={page}",
-          {
-            query: currentUserQuery,
-            url: this.getPath('currentFileNode.url'),
-            page: this.getPath('currentFileNode.currentIndex')
-          }
-        );
+      var query = SC.Query.local(Multivio.SearchResultRecord, {
+              query: currentUserQuery,
+              url: this.getPath('currentFileNode.url'),
+              page: this.getPath('currentFileNode.currentIndex')
+          });
       Multivio.setPath('currentSearchResultsController.content',
           Multivio.store.find(query));
     } else {
@@ -173,13 +170,10 @@ Multivio.SearchOperationalState = SC.State.extend({
         Multivio.store.find(Multivio.FileRecord).setEach('numberOfSearchResults', 0);
         currentFetchingFileNode.set('searchResults', null);
 
-        var storeQuery = SC.Query.local(Multivio.SearchRecord,
-          "query={query} AND url={url}",
-          { 
+        var storeQuery = SC.Query.local(Multivio.SearchRecord, {
             query: currentUserQuery,
             url: Multivio.getPath('currentFileNodeController.url')
-          }
-          );
+        });
 
         SC.Logger.debug('Searching in current file...');
         this.set('currentSearchResults', Multivio.store.find(storeQuery));
@@ -280,9 +274,7 @@ Multivio.SearchOperationalState = SC.State.extend({
       SC.Logger.debug('Searching in all files...');
       Multivio.setPath('searchTreeController.msgStatus', "Searching in all files...");
       Multivio.setPath('searchTreeController.loadingStatus', Multivio.LOADING_LOADING);
-      //var queryStore = SC.Query.local(Multivio.SearchRecord, "query={query}", { 
-      //  query: currentUserQuery
-      //});
+      //var queryStore = SC.Query.local(Multivio.SearchRecord, { query: currentUserQuery });
       Multivio.setPath('searchTreeController.content.searchTreeItemChildren',
         [Multivio.getPath('rootNodeController.content')]);
       // launch the search process from the root node of the document tree
@@ -400,9 +392,9 @@ Multivio.SearchOperationalState = SC.State.extend({
         if (fileNode.get('isSearchable')) {
           Multivio.setPath('searchTreeController.msgStatus',
             "Searching in: %@".fmt(this.getPath('currentFetchingFileNode.url')));
-          var query = SC.Query.local(Multivio.SearchRecord, "query={query} AND url={url}", {
-            query: Multivio.getPath('searchTreeController.currentUserQuery'),
-            url: this.getPath('currentFetchingFileNode.url')
+          var query = SC.Query.local(Multivio.SearchRecord, {
+              query: Multivio.getPath('searchTreeController.currentUserQuery'),
+              url: this.getPath('currentFetchingFileNode.url')
           });
           this.set('currentSearchResults', Multivio.store.find(query));
         } else {

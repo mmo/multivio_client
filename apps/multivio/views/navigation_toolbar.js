@@ -14,6 +14,14 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
   isAnchored: YES,
   canBeClosed: YES,
 
+  /**
+    This binding is used to toggle showing permanently the toolbar or not.
+    @binding {Boolean}
+  */
+  isHorizontalToolbarActive: YES,
+  isHorizontalToolbarActiveBinding: 
+      SC.Binding.oneWay("Multivio.currentContentController.isHorizontalToolbarActive"),
+
   contentView: SC.View.design({
     layout: { left: 0, right: 0, top: 0, bottom: 0 },
     classNames: 'mvo-front-view-transparent'.w(),
@@ -52,7 +60,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       layout: {centerY: 0, centerX: -170, width: 32, height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-rotate-left',
-      target: 'Multivio.navigationTarget',
+      target: 'Multivio.currentContentController',
       action: 'rotateLeft',
       title: '-'
     }),
@@ -60,7 +68,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       layout: {centerY: 0, centerX: -140, width: 32, height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-rotate-right',
-      target: 'Multivio.navigationTarget',
+      target: 'Multivio.currentContentController',
       action: 'rotateRight',
       title: '+'
     }),
@@ -72,14 +80,14 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       target: 'Multivio.mainStatechart',
       action: 'goToPreviousFile',
       title: '<<',
-      isEnabledBinding: 'Multivio.navigationTarget.hasPreviousFile'
+      isEnabledBinding: 'Multivio.currentContentController.hasPreviousFile'
     }),
     previousPageButton: SC.ImageButtonView.design({
       layout: {centerY: 0,  centerX: -50, width: 32, height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-previous-page',
       action: 'goToPreviousIndex',
-      isEnabledBinding: 'Multivio.navigationTarget.hasPreviousIndex',
+      isEnabledBinding: 'Multivio.currentContentController.hasPreviousIndex',
       title: '<'
     }),
 
@@ -103,7 +111,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
             }
             text += charStr;
             if (value > 0 &&
-              value <= Multivio.getPath('navigationTarget.nPages')) {
+              value <= Multivio.getPath('currentContentController.nPages')) {
               return YES;
             }
           }
@@ -117,7 +125,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-next-page',
       action: 'goToNextIndex',
-      isEnabledBinding: 'Multivio.navigationTarget.hasNextIndex',
+      isEnabledBinding: 'Multivio.currentContentController.hasNextIndex',
       title: '>'
     }),
     nextDocButton: SC.ImageButtonView.design({
@@ -126,7 +134,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       image: 'image-button-next-doc',
       target: 'Multivio.mainStatechart',
       action: 'goToNextFile',
-      isEnabledBinding: 'Multivio.navigationTarget.hasNextFile',
+      isEnabledBinding: 'Multivio.currentContentController.hasNextFile',
       title: '>>'
     }),
 
@@ -134,21 +142,21 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       layout: {centerY: 0, centerX: 146, width: 32, height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-zoom-minus',
-      target: 'Multivio.navigationTarget',
+      target: 'Multivio.currentContentController',
       action: 'previousZoom',
       keyEquivalent: 'a',
       isKeyResponder: YES,
-      isEnabledBinding: 'Multivio.navigationTarget.hasPreviousZoom',
+      isEnabledBinding: 'Multivio.currentContentController.hasPreviousZoom',
       title: 'z-'
     }),
     nextZoomButton: SC.ImageButtonView.design({
       layout: {centerY: 0, centerX: 178, width: 32, height: 32 },
       classNames: 'mvo-button-view'.w(),
       image: 'image-button-zoom-plus',
-      target: 'Multivio.navigationTarget',
+      target: 'Multivio.currentContentController',
       action: 'nextZoom',
       keyEquivalent: '+',
-      isEnabledBinding: 'Multivio.navigationTarget.hasNextZoom',
+      isEnabledBinding: 'Multivio.currentContentController.hasNextZoom',
       title: 'z+'
     }),
 
@@ -159,7 +167,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       buttonBehavior: SC.TOGGLE_BEHAVIOR,
       toggleOffValue: NO,
       toggleOnValue: YES,
-      valueBinding: 'Multivio.navigationTarget.fitAll',
+      valueBinding: 'Multivio.currentContentController.fitAll',
       title: 'all'
     }),
     fitWidthButton: SC.ImageButtonView.design({
@@ -169,7 +177,7 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       buttonBehavior: SC.TOGGLE_BEHAVIOR,
       toggleOffValue: NO,
       toggleOnValue: YES,
-      valueBinding: 'Multivio.navigationTarget.fitWidth',
+      valueBinding: 'Multivio.currentContentController.fitWidth',
       title: 'width'
     }),
     hundredPercentButton: SC.ImageButtonView.design({
@@ -179,8 +187,81 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       buttonBehavior: SC.TOGGLE_BEHAVIOR,
       toggleOffValue: NO,
       toggleOnValue: YES,
-      valueBinding: 'Multivio.navigationTarget.hundredPercentZoom',
+      valueBinding: 'Multivio.currentContentController.hundredPercentZoom',
       title: 'hundred'
     })
-  })
+  }),
+
+  /**
+    Event that occurs when the mouse enter this view. Show this view.
+    @param {SC.Event}
+  */   
+  mouseEntered: function (evt) {
+    // if the toolbar button is active do nothing
+    if (!this.get('isHorizontalToolbarActive')) {
+      if (!SC.none(this.hideTimer)) {
+        this.hideTimer.invalidate();
+      }
+      else {
+        this.showView();
+      }
+    }
+    return YES;
+  },
+  
+  /**
+    Event that occurs when the mouse exit this view. Create a timer that hides
+    the view after - 1 sec.
+    @param {SC.Event}
+  */
+  mouseExited: function (evt) {
+    // if the toolbar button is active do nothing
+    if (!this.get('isHorizontalToolbarActive')) {
+      this.hideTimer = SC.Timer.schedule({
+        target: this, 
+        action: 'hideView', 
+        interval: 800
+      });
+    }
+    return YES;
+  },
+
+  /**
+    Toolbar button has been pressed, verify if we must show the toolbar or hide
+    it.
+  */
+  isHorizontalToolbarActivedidChange: function () {
+    var isActive = this.get('isHorizontalToolbarActive');
+    if (!SC.none(isActive)) {
+      if (isActive) {
+        if (!SC.none(this.hideTimer)) {
+          this.hideTimer.invalidate();
+        }
+        this.showView();
+      }
+      else {
+        this.hideView();
+      }
+    }
+  }.observes('isHorizontalToolbarActive'),
+  
+  /**
+    Hide this view
+  */
+  hideView: function () {
+    this.hideTimer = undefined;
+    this.set('classNames', ['sc-view', 'mvo-front-view-invisible']);
+    this.updateLayer();
+    // Multivio.getPath('views.mainContentView.content.innerMainContent').
+    //     becomeFirstResponder();
+  },
+  
+  /**
+    Show this view
+  */
+  showView: function () {
+    this.set('classNames', ['sc-view', 'mvo-front-view']);
+    this.updateLayer();
+  }
+
 });

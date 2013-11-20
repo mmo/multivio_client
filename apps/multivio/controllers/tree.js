@@ -36,20 +36,17 @@ Multivio.treeController = SC.TreeController.create({
 
       if (Multivio.currentFileNodeController.get('url') &&
            (selection.get('url') !== Multivio.currentFileNodeController.get('url'))) {
-        SC.Logger.warn('User click');
         Multivio.mainStatechart.sendEvent('fetchFile', selection);
       }
     }
   },
 
   currentIndexDidChange: function () {
-    //alert('New currentIndex: %@'.fmt(this.get('currentIndex')));
     var currentIndex = this.get('currentIndex');
     var currentFileNode = Multivio.getPath('currentFileNodeController.content');
     if (currentFileNode && currentIndex) {
       var record = this._getNodeFromIndex(currentIndex, currentFileNode);
       if (record && record !== this.getPath('selection.firstObject')) {
-        SC.Logger.warn('SelectObject');
         this.selectObject(record);
       }
     }

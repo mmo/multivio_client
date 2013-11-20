@@ -134,7 +134,7 @@ Multivio.SearchView = SC.PalettePane.design({
       action: 'goToPreviousResult'
     }),
 
-    resultsScrollView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
+    resultsScrollView: SC.ScrollView.design(Multivio.InnerGradientThinTopBottom, {
       layout: { top: 70, left: 3, right: 3, bottom: 32 },
       contentView: SC.SourceListView.design({
         rowHeight: 18,

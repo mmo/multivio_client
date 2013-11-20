@@ -23,7 +23,7 @@ Multivio.ThumbnailsView = SC.PalettePane.extend({
       'thumbnailGridModeButtom'
     ],
 
-    thumbnailScrollView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
+    thumbnailScrollView: SC.ScrollView.design(Multivio.InnerGradientThinTopBottom, {
       layout: { left: 3, top: 3, right: 3, bottom: 44 },
       contentView: SC.GridView.design({
         layerId: 'mvo-thumbnails',

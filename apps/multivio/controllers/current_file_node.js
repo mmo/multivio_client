@@ -8,7 +8,7 @@
 
 /** @class
 
-  This is the controller is the single selection of the Multivio.filesController.
+  This is the controller for the single selection of the Multivio.filesController.
 
   @author jma
   @extends SC.ObjectController
@@ -17,7 +17,6 @@
 Multivio.currentFileNodeController = SC.ObjectController.create({
   currentIndex: null,
 
-/*********************************************************************************/
   hasNextIndex: function () {
     var nPages = this.get('nPages');
     var ci = this.get('currentIndex');

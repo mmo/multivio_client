@@ -14,7 +14,7 @@ Multivio.HelpPane = SC.PalettePane.design({
 //  isModal: NO,
   layout: { left: 45, top: 10, width: 320, bottom: 100 },
   classNames: 'mvo-palette-pane'.w(),
-  contentView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
+  contentView: SC.ScrollView.design(Multivio.InnerGradientThinTopBottom, {
     layout: { top: 3, bottom: 3, left: 3, right: 3 },
     borderStyle: SC.BORDER_NONE,
     hasHorizontalScroller: NO,

@@ -48,7 +48,7 @@ Multivio.mainPage = SC.Page.design({
 
     bottomView: Multivio.TitleView,
 
-    centerView: SC.View.design(Multivio.innerGradient, {
+    centerView: SC.View.design(Multivio.InnerGradient, {
       layout: { top: 5, left: 40, bottom: 40, right: 5 },
       classNames: 'mvo-center-view'.w(),
       childViews: 'mainContentView'.w(),
@@ -69,8 +69,8 @@ Multivio.mainPage = SC.Page.design({
 
   // All these other views are employed on request, according to the app's workflow;
   // they are each declared in their own source file (in the "views" folder)
-  mainPdfView: Multivio.PdfView,
-  mainImageView: Multivio.ImageView,
+  mainPdfView: Multivio.pdfView,
+  mainImageView: Multivio.imageView,
   unsupportedFileView: Multivio.UnsupportedFileView,
   thumbnailsView: Multivio.ThumbnailsView,
   sideToolbar: Multivio.SideToolbarView,

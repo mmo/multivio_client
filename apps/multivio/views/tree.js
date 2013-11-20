@@ -58,7 +58,7 @@ Multivio.TreeView = SC.PalettePane.design({
   layout: {left: 45, top: 10, width: 314, bottom: 100},
   classNames: 'mvo-palette-pane'.w(),
   layerId: 'mvo-tree-view',
-  contentView: SC.ScrollView.design(Multivio.innerGradientThinTopBottom, {
+  contentView: SC.ScrollView.design(Multivio.InnerGradientThinTopBottom, {
     layout: { left: 3, top: 3, right: 3, bottom: 3 },
     contentView: SC.SourceListView.design({
       rowHeight: 18,

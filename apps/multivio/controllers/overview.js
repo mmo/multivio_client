@@ -38,22 +38,21 @@ Multivio.overviewController = SC.ObjectController.create({
     @field
     @type String
   */
-  currentUrl: function () {
-    if (this.get('isContentNode')) {
-      //pdf check
-      if (this.get('isPDF') || this.get('isImage')) {
-        var scaleFactor = this.get('_zoomScale')[this.get('_currentZoomIndex')],
-          newUrl,
-          angle = -this.get('rotationAngle');
-        var url = "%@max_width=%@&max_height=%@&angle=%@&%@"
-          .fmt(this.get('_renderPrefix'), this.get('imageWidth'), 
-            this.get('imageWidth'), angle, this.get('_currentUrl'));
-        SC.Logger.debug('Multivio.overviewController.currentUrl: ' + url);
-        return url;
-      }
-    } 
-    return undefined;
-  }.property('rotationAngle', '_currentUrl'),
+  // currentUrl: function () {
+  //   if (this.get('isContentNode')) {
+  //     //pdf check
+  //     if (this.get('isPDF') || this.get('isImage')) {
+  //       var scaleFactor = this.get('_zoomScale')[this.get('_currentZoomIndex')],
+  //         newUrl,
+  //         angle = -this.get('rotationAngle');
+  //       var url = "%@max_width=%@&max_height=%@&angle=%@&url=%@"
+  //         .fmt(this.get('_renderPrefix'), 12 /*this.get('imageWidth')*/, 
+  //           12 /*this.get('imageWidth')*/, angle, this.get('url'));
+  //       return url;
+  //     }
+  //   } 
+  //   return undefined;
+  // }.property('rotationAngle', '_currentUrl'),
 
   /** @private */
   _showPaletteDidChange: function () {
