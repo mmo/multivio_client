@@ -138,5 +138,16 @@ Multivio.KEYCODES = {
   PAGE_DOWN:    34,
   
   PLUS:         43,
-  MINUS:        45
+  MINUS:        45,
+  
+  UPPERCASE_F:  70,
+  LOWERCASE_F: 102,
+  UPPERCASE_L:  76,
+  LOWERCASE_L: 108,
+  UPPERCASE_N:  78,
+  LOWERCASE_N: 110,
+  UPPERCASE_R:  82,
+  LOWERCASE_R: 114,
+  UPPERCASE_W:  87,
+  LOWERCASE_W: 119
 }

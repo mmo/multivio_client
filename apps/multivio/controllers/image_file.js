@@ -6,31 +6,14 @@
 ==============================================================================
 */
 
-sc_require('mixins/image.js');
-
-
-
-/** @class
-
-  This controlls the center view to display a pdf content.
-
-  @author jma/**
-==============================================================================
-  Project:    Multivio - https://www.multivio.org/
-  Copyright:  (c) 2009-2014 RERO
-  License:    See file COPYING
-==============================================================================
-*/
-
-sc_require('mixins/image.js');
-
+sc_require('controllers/center_image.js');
 
 /** @class
 
   This controlls the center view to display a pdf content.
 
   @author jma
-  @extends SC.ObjectController
+  @author mmo
 */
 Multivio.imageFileController = Multivio.CenterImageController.create({
 

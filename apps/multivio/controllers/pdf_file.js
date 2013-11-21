@@ -6,9 +6,7 @@
 ==============================================================================
 */
 
-sc_require('views/pdf.js');
-sc_require('mixins/image.js');
-sc_require('controllers/current_file_node.js');
+sc_require('controllers/center_image.js');
 
 /** @class
 
@@ -16,7 +14,7 @@ sc_require('controllers/current_file_node.js');
   PDF content.
 
   @author jma
-  @extends SC.ObjectController
+  @author mmo
 */
 Multivio.pdfFileController = Multivio.CenterImageController.create({
 

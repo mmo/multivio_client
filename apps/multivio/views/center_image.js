@@ -17,92 +17,63 @@
 Multivio.CenterImageView = SC.ScrollView.extend({
   classNames: "mvo-center-image-scroll-view".w(),
   layout: { top: 0, left: 0, bottom: 0, right: 0},
-  // horizontalAlign: SC.ALIGN_RIGHT,
-  // verticalAlign: SC.ALIGN_MIDDLE,
 
   /**
     Overrides SC.View.viewDidResize(). Directly updates the controller, in
     order to avoid unnecessary loops and cross-dependencies (bindings are not
     suitable here)
   */
-  viewDidResize: function () {
-    sc_super();
+  containerViewDidResize: function () {
+    // sc_super();
     Multivio.currentContentController.set('displayWindowSize', {
-        width: this.getPath('frame.width'),
-        height: this.getPath('frame.height')
+        width: this.getPath('containerView.frame.width'),
+        height: this.getPath('containerView.frame.height')
       });
     SC.Logger.debug('Multivio.CenterImageView.viewDidResize(): '
-       + this.getPath('frame.width') + 'x'
-       + this.getPath('frame.height'));
-  },
+       + this.getPath('containerView.frame.width') + 'x'
+       + this.getPath('containerView.frame.height'));
+  }.observes('containerView.frame'),
 
   contentView: SC.View.design({
 
-    childViews: ['imageView'/*, 'selectionView', 'infoPanel', 'waitingView'*/],
+    childViews: ['imageView'/*, 'selectionView'*/, 'infoPanel', 'waitingView'],
     classNames: "mvo-center-image-scroll-content-view".w(),
     // layout: { centerX: 0, centerY: 0, width: 1, height: 1 },
 
     resize: function () {
-      // TODO set up a binding here?
-      var s = Multivio.getPath('currentContentController.imageCurrentSize');
-      this.adjust({ width: s.width + 1, height: s.height + 1 });
+      // SC.RunLoop.begin();
+      var is = Multivio.getPath('currentContentController.imageCurrentSize');
+      var ws = Multivio.getPath('currentContentController.displayWindowSize');
+      this.adjust({
+          width: Math.max(is.width, ws.width),
+          height: Math.max(is.height, ws.height)
+        });
+      // SC.RunLoop.end();
     }.observes('Multivio.currentContentController.imageCurrentSize'),
 
-
-    // transitionShow: SC.View.SLIDE_IN,
-    // transitionShowOptions: { direction: 'up', delay: 0, duration: 1.0 },
-    // transitionIn: SC.View.SLIDE_IN,
-    // transitionInOptions: { direction: 'up', delay: 0, duration: 1.0 },
-    // 
-    // transitionHide: SC.View.SLIDE_OUT,
-    // transitionHideOptions: { delay: 0, direction: 'up', duration: 1 },
-    // transitionOut: SC.View.SLIDE_OUT,
-    // transitionOutOptions: { delay: 0, direction: 'up', duration: 1 },
-
     imageView: SC.ImageView.design({
-      childViews: ['selectionView', 'infoPanel', 'waitingView'],
       classNames: "mvo-center-image-view".w(),
-      canLoadInBackground: NO,
-      scale: SC.SCALE_NONE,
+      canLoadInBackground: YES,
+      useImageQueue: NO,
+        scale: SC.SCALE_NONE,
       align: SC.ALIGN_CENTER,
       valueBinding: SC.Binding.oneWay(
           'Multivio.currentContentController.currentUrl'),
 
-      // transitionShow: SC.View.SLIDE_IN,
-      // transitionShowOptions: { direction: 'up', delay: 0, duration: 1.0 },
-      // transitionIn: SC.View.SLIDE_IN,
-      // transitionInOptions: { direction: 'up', delay: 0, duration: 1.0 },
-      // 
-      // transitionHide: SC.View.SLIDE_OUT,
-      // transitionHideOptions: { delay: 0, direction: 'up', duration: 1 },
-      // transitionOut: SC.View.SLIDE_OUT,
-      // transitionOutOptions: { delay: 0, direction: 'up', duration: 1 },
-      // 
-      // transitionAdjust: SC.View.SLIDE_OUT,
-      // transitionAdjustOptions: { delay: 0, direction: 'up', duration: 1 },
-  
-      /**
-        Directly update the controller with the image size, in order to avoid
-        unnecessary loops and cross-dependencies (bindings not suitable here)
-       */
-  //     imageInnerFrameDidChange: function () {
-  //       var newWidth = 0,
-  //           newHeight = 0;
-  //       if (this.get('status') === SC.IMAGE_STATE_LOADED) {
-  //         newWidth = this.get('innerFrame').width;
-  //         newHeight = this.get('innerFrame').height;
-  //         Multivio.currentContentController.set('imageCurrentSize',
-  //             {width: newWidth, height: newHeight});
-  //         this.parentView.adjust(
-  //           { width: newWidth,  height: newHeight, centerX: 0 });
-  //       }
-  // SC.Logger.debug('Multivio.CenterImageView.imageView.imageInnerFrameDidChange(): '
-  //      + newWidth + 'x' + newHeight);
-  //     }.observes('innerFrame'),
+      transitionShow: SC.View.SLIDE_IN,
+      transitionShowOptions: { direction: 'left', delay: 0, duration: 1.0 },
+      transitionHide: SC.View.SLIDE_OUT,
+      transitionHideOptions: { delay: 0, direction: 'right', duration: 1 },
 
-      _statusDidChange: function () {
-        var s = this.get('status');
-      }.observes('status'),
+      isLoading: NO,
+      statusDidChange: function () {
+        if (this.get('status') === SC.IMAGE_STATE_LOADING) {
+          this.set('isLoading', YES);
+        }
+        else {
+          this.set('isLoading', NO);
+        };
+      }.observes('status')
     }),
 
     selectionView: SC.CollectionView.design({
@@ -185,7 +156,7 @@ Multivio.CenterImageView = SC.ScrollView.extend({
         //Multivio.sideToolbarController.closeAll();
       },
 
-      exampleView: SC.View.extend(SC.Control, {
+      exampleView: SC.View.design(SC.Control, {
         classNames: "mvo-search-results".w(),
         render: function (context) {
           if (this.get('isSelected')) {
@@ -197,7 +168,7 @@ Multivio.CenterImageView = SC.ScrollView.extend({
 
     infoPanel: SC.View.design(Multivio.FadeInOut, {
       classNames: "mvo-info-panel mvo-front-view-transparent".w(),
-      layout: { centerX: 0, width: 100, height: 30, top: 16 },
+      layout: { top: 16, right: 16, width: 100, height: 30 },
       childViews: ['textView'],
       textView: SC.LabelView.design({
         layout: { centerY: 0, centerX: 0, width: 80, height: 20 },
@@ -208,18 +179,12 @@ Multivio.CenterImageView = SC.ScrollView.extend({
     }),
 
     waitingView: SC.ImageView.design({
-      layout: { centerX: 0, centerY: 0, width: 36, height: 36 },
-      isVisible: YES,
-      //canvas do not work with animated gifs
-      useCanvas: NO,
-      value: static_url('images/progress_wheel_medium.gif'),
       classNames: "mvo-waiting".w(),
-      isVisible: NO, /*function() {
-        // TODO: check if this works
-        imageViewStatus =
-            this.getPath('parentView.pdfScrollView.contentView.imageView.status');
-        return imageViewStatus === SC.IMAGE_STATE_LOADING;
-      }.observes('parentView.pdfScrollView.contentView.imageView.status')*/
+      layout: { centerX: 0, centerY: 0, width: 36, height: 36 },
+      value: static_url('images/progress_wheel_medium.gif'),
+      isVisible: NO,
+      isVisibleBinding: SC.Binding.oneWay('.parentView.imageView.isLoading').bool(),
+      useCanvas: NO  // canvas does not work with animated gifs
     })
   })
 });

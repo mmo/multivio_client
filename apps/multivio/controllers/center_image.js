@@ -6,7 +6,6 @@
 ==============================================================================
 */
 
-//sc_require('controllers/current_file_node.js');
 
 
 Multivio.ZOOM_MODE_IN_SCALE = 'in-scale';
@@ -19,7 +18,8 @@ Multivio.ZOOM_MODE_100_PERCENT = '100-percent';
   This controlls a file record of static image type (PDF, image...) and allows
   the center view to display its content.
 
-  @author jma, mmo
+  @author jma
+  @author mmo
   @extends SC.ObjectController
 */
 
@@ -65,27 +65,10 @@ Multivio.CenterImageController = SC.ObjectController.extend({
     var size;
     if (!SC.none(sizeExceptions) && !SC.none(sizeExceptions[currentPage])) {
       size = sizeExceptions[currentPage];
-    } else {
+    }
+    else {
       size = this.get('defaultNativeSize');
     }
-
-
-
-    // // adjust according to angle
-    // var rAngle = -this.get('rotationAngle'),
-    //     result = { width: 1, height: 1};
-    // if (rAngle % 180 == 0) {
-    //   // vertical orientation
-    //   result = { width: parseInt(size[0]), height: parseInt(size[1])}
-    // }
-    // else {
-    //   // horizontal orientation
-    //   result = { width: parseInt(size[1]), height: parseInt(size[0])}
-    // }
-
-
-
-
     return { width: parseInt(size[0]), height: parseInt(size[1]) };
   }.property('currentPage', 'defaultNativeSize', 'sizeExceptions'
       /*, 'rotationAngle'*/).cacheable(),
@@ -96,17 +79,6 @@ Multivio.CenterImageController = SC.ObjectController.extend({
     @type Boolean
   */
   isHorizontalToolbarActive: YES,
-
-
-  // DEBUGGING................
-  //
-  // imageSizeDidChange: function () {
-  //   SC.Logger.debug(
-  //     'Multivio.CenterImageController.imageSizeDidChange: width = '
-  //     + this.get('imageWidth') + ', height = ' + this.get('imageHeight')
-  //   );
-  // }.observes('imageWidth', 'imageHeight'),
-
 
   /**
     TODO
@@ -133,7 +105,7 @@ Multivio.CenterImageController = SC.ObjectController.extend({
 
 
 
-  updateImageCurrentSizeValue: function () {
+  updateImageCurrentSizeInfo: function () {
     var zScale = this._zoomScale,
         zIndex = this.get('_currentZoomIndex');
     var scaleFactor = zScale[zIndex],
@@ -173,7 +145,7 @@ Multivio.CenterImageController = SC.ObjectController.extend({
         height: Math.floor(nativeh * newFactor) - 1
       });
 
-    SC.Logger.debug('Multivio.CenterImageController.updateImageCurrentSizeValue: '
+    SC.Logger.debug('Multivio.CenterImageController.updateImageCurrentSizeInfo: '
       + this.get('imageCurrentSize').width + ' x '
       + this.get('imageCurrentSize').height);
   },
@@ -195,7 +167,7 @@ Multivio.CenterImageController = SC.ObjectController.extend({
 
       // before requesting the image from the server, recalculate the required
       // size according to the new context
-      this.updateImageCurrentSizeValue();
+      this.updateImageCurrentSizeInfo();
 
       //different zoom modes
       switch (this.get('zoomMode')) {
