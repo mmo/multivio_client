@@ -44,6 +44,11 @@ Multivio.pdfView = SC.View.design({
         Multivio.mainStatechart.sendEvent('goToPreviousFile');
       }
 
+      if (evt.keyCode === Multivio.KEYCODES.LOWERCASE_O ||
+          evt.keyCode === Multivio.KEYCODES.UPPERCASE_O) {
+        Multivio.overviewController.togglePalette();
+      }
+
       if (evt.keyCode === Multivio.KEYCODES.UPPERCASE_R ||
           evt.keyCode === Multivio.KEYCODES.LOWERCASE_R) {
         Multivio.currentContentController.rotateRight();

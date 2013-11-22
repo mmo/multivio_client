@@ -14,18 +14,66 @@
 */
 sc_require('controllers/overview.js');
 
-Multivio.Overview = SC.PalettePane.design({
-  // TODO: disabled for compatibility with 1.10.0 - must reactivate using new
-  // transitions approach
-  transitions: {
-    // and add transitions
-    // CSS-transition-only timing function (JavaScript gets linear)
-    //opacity: {duration: 0.3, timing: SC.Animatable.TRANSITION_CSS_EASE_IN_OUT }
-    //display: .75 // a bit longer than opacity 
-  },
+Multivio.overview = SC.PalettePane.create({
+  classNames: 'mvo-overview-view'.w(),
   layout: {bottom: 124, right: 30, width: 155, height: 155},
+  // TODO: add transitions
   isAnchored: YES,
-  //isModal: NO,
+  
+  isShowing: NO,
+  isShowingBinding: 'Multivio.overviewController.isShowing',
+
+  // TODO remove any 'overview' observers when possible, to avoid useless overhead
+
+  isShowingDidChange: function () {
+    if (this.get('isShowing')) {
+      this.append();
+    }
+    else {
+      this.remove();
+    }
+    console.warn('Multivio.Overview.isShowing=' + this.get('isShowing'))
+  }.observes('isShowing'),
+
+  contentView: SC.View.design({
+    layout: { top: 5, right: 5, bottom: 5, left: 5 },
+    childViews: 'imageView markerView'.w(),
+    classNames: 'mvo-overview-content-view'.w(),
+
+    imageView: SC.ImageView.design({
+      layout: { top: 0, right: 0, bottom: 0, left: 0 },
+      classNames: 'mvo-overview-content-image-view'.w(),
+      scale: SC.BEST_FIT,
+      //valueBinding: 'Multivio.currentContentController.currentUrl'
+    }),
+    
+    markerView: SC.View.design({
+      layout: { top: 0, left: 0, width: 0, height: 0 },
+      classNames: 'mvo-overview-content-marker-view'.w(),
+      imageDidChange: function () {
+        var os = { width: 145, height: 145 }, // overview size
+            newLayout = {},
+            ws = Multivio.getPath('currentContentController.displayWindowSize'),
+            is = Multivio.getPath('currentContentController.imageCurrentSize'),
+            mr = { // marker ratio
+              width: is.width / Math.max(is.width, is.height),
+              height: is.height / Math.max(is.width, is.height)
+            };
+
+        newLayout.width =
+            Math.floor(os.width * Math.min(ws.width, is.width) / is.width * mr.width);
+        newLayout.height =
+            Math.floor(os.height * Math.min(ws.height, is.height) / is.height * mr.height);
+
+        this.adjust(newLayout);
+
+console.warn('Multivio.overview.contentView.markerView.newLayout='
++ newLayout.width/os.width + ' x ' + newLayout.height/os.height);
+
+      }//.observes('.parentView.imageView.value')
+    })
+  })
+
   // contentView: SC.View.extend({
   //   layout: {top: 5, right: 5, bottom: 5, left: 5},
   //   childViews: ['imageView'],
@@ -85,18 +133,13 @@ Multivio.Overview = SC.PalettePane.design({
   //   })
   // }),
 
-  /** @private */
-  open: function () {
-    // first, fade this view out
-    this.adjust("opacity", 0);
-    this.append();
-    this.adjust("opacity", 1);
-  },
-
-  close: function () {
-    // first, fade this view out
-    this.adjust("opacity", 0);
-    this.invokeLater(this.remove, 300);
-  }
+  // /** @private */
+  // show: function () {
+  //   this.append();
+  // },
+  // 
+  // hide: function () {
+  //   this.remove();
+  // }
 
 });

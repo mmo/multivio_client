@@ -51,8 +51,8 @@ Multivio.NavigationToolbarView = SC.PalettePane.extend({
       buttonBehavior: SC.TOGGLE_BEHAVIOR,
       toggleOffValue: NO,
       toggleOnValue: YES,
-      //value: null,
-      valueBinding: 'Multivio.overviewController.showPalette',
+      value: NO,
+      valueBinding: 'Multivio.overviewController.isShowing',
       title: 'overview'
     }),
 

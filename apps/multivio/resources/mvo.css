@@ -71,6 +71,11 @@ $theme.mvo-palette-pane {
   padding: 20px;
 }
 
+.sc-pane .mvo-overview-content-marker-view {
+  border: 2px solid red;
+  z-index: 100;
+}
+
 .mvo-search-results {
   opacity: 0.50;
   -moz-opacity: 0.50;

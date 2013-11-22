@@ -61,14 +61,15 @@ Multivio.CenterImageView = SC.ScrollView.extend({
       //     'Multivio.currentContentController.currentUrl'),
 
       urlDidChange: function () {
-        this.set('isVisible', NO);
-        this.invokeLater(function () {
-            this.set('value', Multivio.getPath('currentContentController.currentUrl'));
-          }, 300);
+        // this.set('isVisible', NO);
+        this.set('value', Multivio.getPath('currentContentController.currentUrl'));
+        // this.invokeLater(function () {
+        //     this.set('value', Multivio.getPath('currentContentController.currentUrl'));
+        //   }, 400);
       }.observes('Multivio.currentContentController.currentUrl'),
 
       transitionShow: SC.View.FADE_IN,
-      transitionShowOptions: { delay: 0, duration: 0.6 },
+      transitionShowOptions: { delay: 0, duration: 0.2 },
       transitionHide: SC.View.FADE_OUT,
       transitionHideOptions: { delay: 0, duration: 0.2 },
 

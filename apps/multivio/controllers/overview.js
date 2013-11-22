@@ -15,24 +15,27 @@
 sc_require('views/overview.js');
 Multivio.overviewController = SC.ObjectController.create({
 
-  isPaletteVisible: null,
-  isPaletteVisibleBinding: 'Multivio.mainPage.overview.isVisibleInWindow',
-  contentBinding: 'Multivio.pdfFileController',
+  // isPaletteVisible: null,
+  // isPaletteVisibleBinding: 'Multivio.mainPage.overview.isVisibleInWindow',
+  // contentBinding: 'Multivio.currentContentController.content',
   imageWidth: 140,
 
-  /**
-    @field
-    @type Boolean
-  */
-  isEnabled: function () {
-    return YES;
-  }.property(),
+  // TODO add transitions
+  // TODO keyboard does not work when the palette is showing (key responder problem?)
 
   /**
     @field
     @type Boolean
   */
-  showPalette: null,
+  // isEnabled: function () {
+  //   return YES;
+  // }.property(),
+
+  /**
+    @field
+    @type Boolean
+  */
+//  showPalette: null,
 
   /**
     @field
@@ -54,18 +57,18 @@ Multivio.overviewController = SC.ObjectController.create({
   //   return undefined;
   // }.property('rotationAngle', '_currentUrl'),
 
-  /** @private */
-  _showPaletteDidChange: function () {
-    var showPalette = this.get('showPalette');
-    var ov = Multivio.getPath('mainPage.overview');
-    if (ov) {
-      if (showPalette) {
-        ov.open();
-      } else {
-        ov.close();
-      }
-    }
-  }.observes('showPalette')
+  isShowing: NO,
+
+  /**
+    Checks or sets 100-percent zoom mode
+    @property
+    @type Boolean
+   */
+  togglePalette: function (key, value) {
+    var is = this.get('isShowing');
+    this.set('isShowing', !is);
+  }.property('isShowing')
+
 });
 
 
