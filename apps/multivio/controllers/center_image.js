@@ -104,7 +104,8 @@ Multivio.CenterImageController = SC.ObjectController.extend({
   _urlSuffix: null,
 
 
-
+  exactScaleFactor: 1.0,
+  
   updateImageCurrentSizeInfo: function () {
     var zScale = this._zoomScale,
         zIndex = this.get('_currentZoomIndex');
@@ -144,10 +145,12 @@ Multivio.CenterImageController = SC.ObjectController.extend({
         width: Math.floor(nativew * newFactor) - 1,
         height: Math.floor(nativeh * newFactor) - 1
       });
+    this.set('exactScaleFactor', newFactor);
 
     SC.Logger.debug('Multivio.CenterImageController.updateImageCurrentSizeInfo: '
       + this.get('imageCurrentSize').width + ' x '
-      + this.get('imageCurrentSize').height);
+      + this.get('imageCurrentSize').height
+      + ', scale=' + this.get('exactScaleFactor'));
   },
 
   /**
@@ -263,24 +266,6 @@ Multivio.CenterImageController = SC.ObjectController.extend({
   //    ZOOM            //
   //********************//
 
-  /**
-    Default width
-    @property
-    @type Number
-   */
-  // _defaultWidth: function () {
-  //   return this.getPath('nativeImageSize.width');
-  // }.property('nativeImageSize').cacheable(),
-  
-  /**
-    Default height
-    @property
-    @type Number
-   */
-  // _defaultHeight: function () {
-  //   return this.getPath('nativeImageSize.height');
-  // }.property('nativeImageSize').cacheable(),
-
   // hasThumbnails: function () {
   //   if (this.get('nPages') > 1) {
   //     return YES;
@@ -390,30 +375,19 @@ Multivio.CenterImageController = SC.ObjectController.extend({
     @returns Number
    */
   _getNearestZoomIndex: function (roundedDown) {
-    var nativeWidth = this.get('imageNativeSize').width,
-        currentWidth = this.get('imageCurrentSize').width;
-
-    // adjust width info according to angle
-    var rAngle = -this.get('rotationAngle');
-    if (rAngle % 180 != 0) {
-      // horizontal orientation
-      currentWidth = this.get('imageCurrentSize').height;
-    }
-
-    var currentZoomValue = currentWidth / nativeWidth;
-
+    var factor = this.get('exactScaleFactor');
     var zooms = this._zoomScale;
     var nearest = -1, i;
     var bestDistanceFoundYet = Number.MAX_VALUE;
     // We iterate on the array...
     for (i = 0; i < zooms.length; i++) {
       // if we found the desired number, we return it.
-      if (zooms[i] === currentZoomValue) {
+      if (zooms[i] === factor) {
         nearest = i;
       } else {
         // else, we consider the difference between the desired number and the
         // current number in the array.
-        var d = Math.abs(currentZoomValue - zooms[i]);
+        var d = Math.abs(factor - zooms[i]);
         if (d < bestDistanceFoundYet) {
           // For the moment, this value is the nearest to the desired number...
           nearest = i;
@@ -422,13 +396,13 @@ Multivio.CenterImageController = SC.ObjectController.extend({
       }
     }
     if (roundedDown) {
-      if (nearest === 0 || currentZoomValue > zooms[nearest]) {
+      if (nearest === 0 || factor > zooms[nearest]) {
         return nearest;
       } else {
         return nearest - 1;
       }
     } else {
-      if (nearest === (zooms.length - 1)  || currentZoomValue < zooms[nearest]) {
+      if (nearest === (zooms.length - 1)  || factor < zooms[nearest]) {
         return nearest;
       } else {
         return nearest + 1;

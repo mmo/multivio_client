@@ -55,25 +55,39 @@ Multivio.CenterImageView = SC.ScrollView.extend({
       classNames: "mvo-center-image-view".w(),
       canLoadInBackground: YES,
       useImageQueue: NO,
-        scale: SC.SCALE_NONE,
+      scale: SC.SCALE_NONE,
       align: SC.ALIGN_CENTER,
-      valueBinding: SC.Binding.oneWay(
-          'Multivio.currentContentController.currentUrl'),
+      // valueBinding: SC.Binding.oneWay(
+      //     'Multivio.currentContentController.currentUrl'),
 
-      transitionShow: SC.View.SLIDE_IN,
-      transitionShowOptions: { direction: 'left', delay: 0, duration: 1.0 },
-      transitionHide: SC.View.SLIDE_OUT,
-      transitionHideOptions: { delay: 0, direction: 'right', duration: 1 },
+      urlDidChange: function () {
+        this.set('isVisible', NO);
+        this.invokeLater(function () {
+            this.set('value', Multivio.getPath('currentContentController.currentUrl'));
+          }, 300);
+      }.observes('Multivio.currentContentController.currentUrl'),
+
+      transitionShow: SC.View.FADE_IN,
+      transitionShowOptions: { delay: 0, duration: 0.6 },
+      transitionHide: SC.View.FADE_OUT,
+      transitionHideOptions: { delay: 0, duration: 0.2 },
 
       isLoading: NO,
+
       statusDidChange: function () {
         if (this.get('status') === SC.IMAGE_STATE_LOADING) {
           this.set('isLoading', YES);
         }
         else {
           this.set('isLoading', NO);
-        };
-      }.observes('status')
+        }
+      }.observes('status'),
+      
+      valueDidChange: function () {
+        // SC.run(function () { this.set('isVisible', YES); });
+        this.set('isVisible', YES);
+      }.observes('value')
+
     }),
 
     selectionView: SC.CollectionView.design({
@@ -83,15 +97,6 @@ Multivio.CenterImageView = SC.ScrollView.extend({
       selectionBinding: 'Multivio.currentSearchResultsController.selection',
       nativeImageSizeBinding: 'Multivio.currentContentController.nativeImageSize',
       rotationAngleBinding: 'Multivio.currentContentController.rotationAngle',
-
-      currentZoomFactor: function () {
-        var angle = this.get('rotationAngle');
-        if (angle % 180) {
-          return this.getPath('frame.height') / this.get('nativeImageSize').width;
-        } else {
-          return this.getPath('frame.width') / this.get('nativeImageSize').width;
-        }
-      }.property('nativeImageSize', 'layout', 'rotationAngle'),
 
       /* TODO: is this necessary? (check with SC.InnerImage.scale) */
       viewDidResize: function () {
@@ -112,37 +117,39 @@ Multivio.CenterImageView = SC.ScrollView.extend({
 
       layoutForContentIndex: function (contentIndex) {
         var current = this.get('content').objectAt(contentIndex);
-        var zoomFactor = this.get('currentZoomFactor');
+        var factor =
+          Multivio.getPath('currentContentController.exactScaleFactor');
+
         if (current) {
           var angle = this.get('rotationAngle');
           switch (Math.abs(angle % 360)) {
           case 0:
             return {
-              top: current.get('y1') * zoomFactor,
-              left: current.get('x1') * zoomFactor,
-              height: (current.get('y2') - current.get('y1')) * zoomFactor,
-              width: (current.get('x2') - current.get('x1')) * zoomFactor
+              top: current.get('y1') * factor,
+              left: current.get('x1') * factor,
+              height: (current.get('y2') - current.get('y1')) * factor,
+              width: (current.get('x2') - current.get('x1')) * factor
             };
           case 90:
             return {
-              right: current.get('y1') * zoomFactor,
-              top: current.get('x1') * zoomFactor,
-              width: (current.get('y2') - current.get('y1')) * zoomFactor,
-              height: (current.get('x2') - current.get('x1')) * zoomFactor
+              right: current.get('y1') * factor,
+              top: current.get('x1') * factor,
+              width: (current.get('y2') - current.get('y1')) * factor,
+              height: (current.get('x2') - current.get('x1')) * factor
             };
           case 180:
             return {
-              bottom: current.get('y1') * zoomFactor,
-              right: current.get('x1') * zoomFactor,
-              height: (current.get('y2') - current.get('y1')) * zoomFactor,
-              width: (current.get('x2') - current.get('x1')) * zoomFactor
+              bottom: current.get('y1') * factor,
+              right: current.get('x1') * factor,
+              height: (current.get('y2') - current.get('y1')) * factor,
+              width: (current.get('x2') - current.get('x1')) * factor
             };
           case 270:
             return {
-              left: current.get('y1') * zoomFactor,
-              bottom: current.get('x1') * zoomFactor,
-              width: (current.get('y2') - current.get('y1')) * zoomFactor,
-              height: (current.get('x2') - current.get('x1')) * zoomFactor
+              left: current.get('y1') * factor,
+              bottom: current.get('x1') * factor,
+              width: (current.get('y2') - current.get('y1')) * factor,
+              height: (current.get('x2') - current.get('x1')) * factor
             };
           }
         }
@@ -183,7 +190,7 @@ Multivio.CenterImageView = SC.ScrollView.extend({
       layout: { centerX: 0, centerY: 0, width: 36, height: 36 },
       value: static_url('images/progress_wheel_medium.gif'),
       isVisible: NO,
-      isVisibleBinding: SC.Binding.oneWay('.parentView.imageView.isLoading').bool(),
+      // isVisibleBinding: SC.Binding.oneWay('.parentView.imageView.isLoading').bool(),
       useCanvas: NO  // canvas does not work with animated gifs
     })
   })
